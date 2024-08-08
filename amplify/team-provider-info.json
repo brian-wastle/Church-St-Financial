@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-churchstfinancial-dev-86e49-unauthRole",
       "StackName": "amplify-churchstfinancial-dev-86e49",
       "StackId": "arn:aws:cloudformation:us-east-1:992382834036:stack/amplify-churchstfinancial-dev-86e49/5da3a7c0-5591-11ef-b0ea-127547dbbf89",
-      "AmplifyAppId": "d3q7uhzli0jaj9"
+      "AmplifyAppId": "d3q7uhzli0jaj9",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-churchstfinancial-dev-86e49-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
@@ -19,10 +20,14 @@
         "churchstfinancial02a51904CustomMessage": {
           "REDIRECTURL": "",
           "EMAILSUBJECT": "Confirm your Church St. Financial Investment Account",
-          "EMAILMESSAGE": "Please click the link below and follow the prompts to enable access to your Church St. Financial investment account:"
+          "EMAILMESSAGE": "Please click the link below and follow the prompts to enable access to your Church St. Financial investment account:",
+          "deploymentBucketName": "amplify-churchstfinancial-dev-86e49-deployment",
+          "s3Key": "amplify-builds/churchstfinancial02a51904CustomMessage-42554d41547469774570-build.zip"
         },
         "churchstfinancial02a51904PostConfirmation": {
-          "GROUP": "Clients"
+          "GROUP": "Clients",
+          "deploymentBucketName": "amplify-churchstfinancial-dev-86e49-deployment",
+          "s3Key": "amplify-builds/churchstfinancial02a51904PostConfirmation-3532574b386b4b566a43-build.zip"
         }
       }
     }

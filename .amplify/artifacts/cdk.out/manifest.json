@@ -1,0 +1,1130 @@
+{
+  "version": "36.0.0",
+  "artifacts": {
+    "amplify-churchstfinancial-brian-sandbox-9991c4848c.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "amplify-churchstfinancial-brian-sandbox-9991c4848c.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "amplify-churchstfinancial-brian-sandbox-9991c4848c": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "amplify-churchstfinancial-brian-sandbox-9991c4848c.template.json",
+        "terminationProtection": false,
+        "tags": {
+          "amplify:deployment-type": "sandbox",
+          "created-by": "amplify"
+        },
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/1627af8ca9d9adf168b63c6a6ed262f5548fc148db372e522a4569217ea88fc5.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "amplify-churchstfinancial-brian-sandbox-9991c4848c.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "amplify-churchstfinancial-brian-sandbox-9991c4848c.assets"
+      ],
+      "metadata": {
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "amplify:deployment-type",
+                "Value": "sandbox"
+              },
+              {
+                "Key": "created-by",
+                "Value": "amplify"
+              }
+            ]
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/deploymentType": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "deploymentType"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/region": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "region"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/auth/amplifyAuth/UserPool/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthUserPool4BA7F805"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/auth/amplifyAuth/UserPoolAppClient/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthUserPoolAppClient2626C6F8"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/auth/amplifyAuth/IdentityPool": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthIdentityPool3FDE84CC"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/auth/amplifyAuth/authenticatedUserRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthauthenticatedUserRoleD8DA3689"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/auth/amplifyAuth/unauthenticatedUserRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthunauthenticatedUserRole2B524D9E"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/auth/amplifyAuth/IdentityPoolRoleAttachment": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyAuthIdentityPoolRoleAttachment045F17C8"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/auth/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/auth/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/auth/amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthUserPoolAD461C86Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthUserPoolAD461C86Ref"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/auth/amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthUserPoolAppClientCA1C305ERef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthUserPoolAppClientCA1C305ERef"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/auth/amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthIdentityPoolB465594BRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthIdentityPoolB465594BRef"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/auth/amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthauthenticatedUserRole041B2DB2Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthauthenticatedUserRole041B2DB2Ref"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/auth/amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthunauthenticatedUserRole0FB4B8A8Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthunauthenticatedUserRole0FB4B8A8Ref"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/auth.NestedStack/auth.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "auth179371D7"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/userPoolId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "userPoolId"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/webClientId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "webClientId"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/identityPoolId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "identityPoolId"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/authRegion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "authRegion"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/allowUnauthenticatedIdentities": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "allowUnauthenticatedIdentities"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/signupAttributes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "signupAttributes"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/usernameAttributes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "usernameAttributes"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/verificationMechanisms": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "verificationMechanisms"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/passwordPolicyMinLength": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "passwordPolicyMinLength"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/passwordPolicyRequirements": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "passwordPolicyRequirements"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/mfaConfiguration": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "mfaConfiguration"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/mfaTypes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "mfaTypes"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/socialProviders": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "socialProviders"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/oauthCognitoDomain": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthCognitoDomain"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/oauthScope": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthScope"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/oauthRedirectSignIn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthRedirectSignIn"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/oauthRedirectSignOut": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthRedirectSignOut"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/oauthResponseType": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthResponseType"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/oauthClientId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "oauthClientId"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/GraphQLAPI/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataGraphQLAPI42A6FA33"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/GraphQLAPI/TransformerSchema": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataGraphQLAPITransformerSchemaFF50A789"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/GraphQLAPI/NONE_DS": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "NONE_DS"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/GraphQLAPI/NONE_DS/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataGraphQLAPINONEDS684BF699"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "NONE_DS"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyTableManager/AmplifyManagedTableIsCompleteRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyManagedTableIsCompleteRoleF825222C"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyTableManager/AmplifyManagedTableOnEventRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyManagedTableOnEventRoleB4E71DEA"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyTableManager/AmplifyManagedTableOnEventRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyManagedTableOnEventRoleDefaultPolicyF6DABCB6"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyTableManager/TableManagerCustomProvider/framework-onEvent/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TableManagerCustomProviderframeworkonEvent1DFC2ECC"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyTableManager/TableManagerCustomProvider/framework-isComplete/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TableManagerCustomProviderframeworkisComplete2E51021B"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyTableManager/AmplifyTableWaiterStateMachine/Role/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyTableWaiterStateMachineRole470BE899"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyTableManager/AmplifyTableWaiterStateMachine/Role/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyTableWaiterStateMachineRoleDefaultPolicy89F3836A"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyTableManager/AmplifyTableWaiterStateMachine/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AmplifyTableWaiterStateMachine060600BC"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyTableManager/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyTableManager/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyTableManager/reference-to-amplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataGraphQLAPI76A2EEE2ApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataGraphQLAPI76A2EEE2ApiId"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyTableManager/amplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent8D335BD2Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent8D335BD2Arn"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyTableManager.NestedStack/AmplifyTableManager.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource86290833"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/DynamoDBModelTableReadIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableReadIOPS"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/DynamoDBModelTableWriteIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableWriteIOPS"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/DynamoDBBillingMode": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBillingMode"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/DynamoDBEnablePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnablePointInTimeRecovery"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/DynamoDBEnableServerSideEncryption": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnableServerSideEncryption"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/HasEnvironmentParameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "HasEnvironmentParameter"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/ShouldUseServerSideEncryption": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUseServerSideEncryption"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/ShouldUsePayPerRequestBilling": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePayPerRequestBilling"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/ShouldUsePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ShouldUsePointInTimeRecovery"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/TodoTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Todo"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/TodoTable/Default/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TodoTable"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Todo"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/CustomTableTodoTable": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Todo"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/GetAttTodoTableStreamArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttTodoTableStreamArn"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/GetAttTodoTableName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetAttTodoTableName"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/TodoIAMRole": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "TodoIAMRole"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/TodoIAMRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TodoIAMRole2DA8E66E"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "TodoIAMRole"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/TodoDataSource": [
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "TodoTable"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/TodoDataSource/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "TodoDataSource"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "TodoTable"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/QuerygetTodoauth0Function/QuerygetTodoauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetTodoauth0FunctionQuerygetTodoauth0FunctionAppSyncFunction846D8436"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetTodoauth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/QuerygetTodopostAuth0Function/QuerygetTodopostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerygetTodopostAuth0FunctionQuerygetTodopostAuth0FunctionAppSyncFunction6BE14593"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerygetTodopostAuth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/QueryGetTodoDataResolverFn/QueryGetTodoDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryGetTodoDataResolverFnQueryGetTodoDataResolverFnAppSyncFunctionE2B57DAD"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryGetTodoDataResolverFn"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/queryGetTodoResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "GetTodoResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.getTodo"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/QuerylistTodosauth0Function/QuerylistTodosauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistTodosauth0FunctionQuerylistTodosauth0FunctionAppSyncFunction7D761961"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistTodosauth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/QuerylistTodospostAuth0Function/QuerylistTodospostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QuerylistTodospostAuth0FunctionQuerylistTodospostAuth0FunctionAppSyncFunction154D8577"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QuerylistTodospostAuth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/QueryListTodosDataResolverFn/QueryListTodosDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "QueryListTodosDataResolverFnQueryListTodosDataResolverFnAppSyncFunctionF825FE47"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "QueryListTodosDataResolverFn"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/queryListTodosResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ListTodoResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Query.listTodos"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/MutationcreateTodoinit0Function/MutationcreateTodoinit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateTodoinit0FunctionMutationcreateTodoinit0FunctionAppSyncFunction54DE5B8B"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateTodoinit0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/MutationcreateTodoauth0Function/MutationcreateTodoauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateTodoauth0FunctionMutationcreateTodoauth0FunctionAppSyncFunction21817E36"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateTodoauth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/MutationcreateTodopostAuth0Function/MutationcreateTodopostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationcreateTodopostAuth0FunctionMutationcreateTodopostAuth0FunctionAppSyncFunctionED59EB9F"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationcreateTodopostAuth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/MutationCreateTodoDataResolverFn/MutationCreateTodoDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationCreateTodoDataResolverFnMutationCreateTodoDataResolverFnAppSyncFunction900EC5CF"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationCreateTodoDataResolverFn"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/mutationCreateTodoResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CreateTodoResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.createTodo"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/MutationupdateTodoinit0Function/MutationupdateTodoinit0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateTodoinit0FunctionMutationupdateTodoinit0FunctionAppSyncFunction1B95BB19"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateTodoinit0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/MutationupdateTodoauth0Function/MutationupdateTodoauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateTodoauth0FunctionMutationupdateTodoauth0FunctionAppSyncFunction1E4A3112"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateTodoauth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/MutationupdateTodopostAuth0Function/MutationupdateTodopostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationupdateTodopostAuth0FunctionMutationupdateTodopostAuth0FunctionAppSyncFunction50C507D7"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationupdateTodopostAuth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/MutationUpdateTodoDataResolverFn/MutationUpdateTodoDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationUpdateTodoDataResolverFnMutationUpdateTodoDataResolverFnAppSyncFunctionBC238C49"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationUpdateTodoDataResolverFn"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/mutationUpdateTodoResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "UpdateTodoResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.updateTodo"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/MutationdeleteTodoauth0Function/MutationdeleteTodoauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteTodoauth0FunctionMutationdeleteTodoauth0FunctionAppSyncFunctionC82C218C"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteTodoauth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/MutationdeleteTodopostAuth0Function/MutationdeleteTodopostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationdeleteTodopostAuth0FunctionMutationdeleteTodopostAuth0FunctionAppSyncFunction483271A2"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationdeleteTodopostAuth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/MutationDeleteTodoDataResolverFn/MutationDeleteTodoDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MutationDeleteTodoDataResolverFnMutationDeleteTodoDataResolverFnAppSyncFunction3879153F"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "MutationDeleteTodoDataResolverFn"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/mutationDeleteTodoResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DeleteTodoResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Mutation.deleteTodo"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/SubscriptiononCreateTodoauth0Function/SubscriptiononCreateTodoauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateTodoauth0FunctionSubscriptiononCreateTodoauth0FunctionAppSyncFunction042EF9E1"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateTodoauth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/SubscriptiononCreateTodopostAuth0Function/SubscriptiononCreateTodopostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateTodopostAuth0FunctionSubscriptiononCreateTodopostAuth0FunctionAppSyncFunction18E34C4E"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononCreateTodopostAuth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/SubscriptionOnCreateTodoDataResolverFn/SubscriptionOnCreateTodoDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnCreateTodoDataResolverFnSubscriptionOnCreateTodoDataResolverFnAppSyncFunction462A70C9"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnCreateTodoDataResolverFn"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/subscriptionOnCreateTodoResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononCreateTodoResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onCreateTodo"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/SubscriptiononUpdateTodoauth0Function/SubscriptiononUpdateTodoauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateTodoauth0FunctionSubscriptiononUpdateTodoauth0FunctionAppSyncFunction80D0DFA3"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateTodoauth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/SubscriptiononUpdateTodopostAuth0Function/SubscriptiononUpdateTodopostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateTodopostAuth0FunctionSubscriptiononUpdateTodopostAuth0FunctionAppSyncFunction04445BC7"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononUpdateTodopostAuth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/SubscriptionOnUpdateTodoDataResolverFn/SubscriptionOnUpdateTodoDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnUpdateTodoDataResolverFnSubscriptionOnUpdateTodoDataResolverFnAppSyncFunction523DF0E4"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnUpdateTodoDataResolverFn"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/subscriptionOnUpdateTodoResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononUpdateTodoResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onUpdateTodo"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/SubscriptiononDeleteTodoauth0Function/SubscriptiononDeleteTodoauth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteTodoauth0FunctionSubscriptiononDeleteTodoauth0FunctionAppSyncFunctionF69F2220"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteTodoauth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/SubscriptiononDeleteTodopostAuth0Function/SubscriptiononDeleteTodopostAuth0Function.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteTodopostAuth0FunctionSubscriptiononDeleteTodopostAuth0FunctionAppSyncFunctionE131CBE7"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptiononDeleteTodopostAuth0Function"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/SubscriptionOnDeleteTodoDataResolverFn/SubscriptionOnDeleteTodoDataResolverFn.AppSyncFunction": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptionOnDeleteTodoDataResolverFnSubscriptionOnDeleteTodoDataResolverFnAppSyncFunction3E641E8C"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "SubscriptionOnDeleteTodoDataResolverFn"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/subscriptionOnDeleteTodoResolver": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SubscriptiononDeleteTodoResolver"
+          },
+          {
+            "type": "graphqltransformer:resourceName",
+            "data": "Subscription.onDeleteTodo"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/reference-to-amplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource8ED5F11BOutputs.amplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataAmplifyTableManagerTableManagerCustomProviderframeworkonEvent8D335BD2Arn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataAmplifyTableManagerNestedStackAmplifyTableManagerNestedStackResource8ED5F11BOutputsamplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataAmplifyTableManagerTable981FEAFF"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/reference-to-amplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataGraphQLAPI76A2EEE2ApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataGraphQLAPI76A2EEE2ApiId"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/reference-to-amplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataGraphQLAPINONEDS120750ECName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataGraphQLAPINONEDS120750ECName"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/reference-to-amplifychurchstfinancialbriansandbox9991c4848cauthNestedStackauthNestedStackResource4EAF7928Outputs.amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthauthenticatedUserRole041B2DB2Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifychurchstfinancialbriansandbox9991c4848cauthNestedStackauthNestedStackResource4EAF7928Outputsamplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthauthenticatedUserRole041B2DB2Ref"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/reference-to-amplifychurchstfinancialbriansandbox9991c4848cauthNestedStackauthNestedStackResource4EAF7928Outputs.amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthunauthenticatedUserRole0FB4B8A8Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifychurchstfinancialbriansandbox9991c4848cauthNestedStackauthNestedStackResource4EAF7928Outputsamplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthunauthenticatedUserRole0FB4B8A8Ref"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo/reference-to-amplifychurchstfinancialbriansandbox9991c4848cauthNestedStackauthNestedStackResource4EAF7928Outputs.amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthIdentityPoolB465594BRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifychurchstfinancialbriansandbox9991c4848cauthNestedStackauthNestedStackResource4EAF7928Outputsamplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthIdentityPoolB465594BRef"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/Todo.NestedStack/Todo.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataTodoNestedStackTodoNestedStackResource551CEA56"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AuthRolePolicy01/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAuthRolePolicy01567A5654"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/UnauthRolePolicy01/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataUnauthRolePolicy01355B9DCF"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucket9CCB4ACA"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucketPolicyF1C1C548"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsBucket/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsBucketAutoDeleteObjectsCustomResource437F26F5"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsDeployment/AwsCliLayer/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentAwsCliLayerE322F905"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifyData/AmplifyCodegenAssets/AmplifyCodegenAssetsDeployment/CustomResource-1536MiB/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiB21775929"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/DynamoDBModelTableReadIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableReadIOPS"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/DynamoDBModelTableWriteIOPS": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBModelTableWriteIOPS"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/DynamoDBBillingMode": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBBillingMode"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/DynamoDBEnablePointInTimeRecovery": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnablePointInTimeRecovery"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/DynamoDBEnableServerSideEncryption": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DynamoDBEnableServerSideEncryption"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/LatestNodeRuntimeMap": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LatestNodeRuntimeMap"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/ServiceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBServiceRoleA41FC8C2"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/ServiceRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBServiceRoleDefaultPolicyFF1C635B"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C1536MiBC5D8AB21"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/AMPLIFY_DATA_GRAPHQL_ENDPOINTParameter/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "AMPLIFYDATAGRAPHQLENDPOINTParameter1C2CBB16"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/reference-to-amplifychurchstfinancialbriansandbox9991c4848cauthNestedStackauthNestedStackResource4EAF7928Outputs.amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthUserPoolAD461C86Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifychurchstfinancialbriansandbox9991c4848cauthNestedStackauthNestedStackResource4EAF7928Outputsamplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthUserPoolAD461C86Ref"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/reference-to-amplifychurchstfinancialbriansandbox9991c4848cauthNestedStackauthNestedStackResource4EAF7928Outputs.amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthauthenticatedUserRole041B2DB2Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifychurchstfinancialbriansandbox9991c4848cauthNestedStackauthNestedStackResource4EAF7928Outputsamplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthauthenticatedUserRole041B2DB2Ref"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/reference-to-amplifychurchstfinancialbriansandbox9991c4848cauthNestedStackauthNestedStackResource4EAF7928Outputs.amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthunauthenticatedUserRole0FB4B8A8Ref": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifychurchstfinancialbriansandbox9991c4848cauthNestedStackauthNestedStackResource4EAF7928Outputsamplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthunauthenticatedUserRole0FB4B8A8Ref"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/reference-to-amplifychurchstfinancialbriansandbox9991c4848cauthNestedStackauthNestedStackResource4EAF7928Outputs.amplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthIdentityPoolB465594BRef": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "referencetoamplifychurchstfinancialbriansandbox9991c4848cauthNestedStackauthNestedStackResource4EAF7928Outputsamplifychurchstfinancialbriansandbox9991c4848cauthamplifyAuthIdentityPoolB465594BRef"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataGraphQLAPI76A2EEE2ApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataGraphQLAPI76A2EEE2ApiId"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataGraphQLAPI76A2EEE2GraphQLUrl": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataGraphQLAPI76A2EEE2GraphQLUrl"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data/amplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiBEB9D6236DestinationBucketArn": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifychurchstfinancialbriansandbox9991c4848cdataamplifyDataAmplifyCodegenAssetsAmplifyCodegenAssetsDeploymentCustomResource1536MiBEB9D6236DestinationBucketArn"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/data.NestedStack/data.NestedStackResource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "data7552DF31"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/awsAppsyncApiId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncApiId"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/awsAppsyncApiEndpoint": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncApiEndpoint"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/awsAppsyncAuthenticationType": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncAuthenticationType"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/awsAppsyncRegion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncRegion"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/amplifyApiModelSchemaS3Uri": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "amplifyApiModelSchemaS3Uri"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/awsAppsyncAdditionalAuthenticationTypes": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "awsAppsyncAdditionalAuthenticationTypes"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/amplify-churchstfinancial-brian-sandbox-9991c4848c/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "amplify-churchstfinancial-brian-sandbox-9991c4848c"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

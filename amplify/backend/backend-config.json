@@ -88,7 +88,39 @@
         }
       ]
     },
+    "AMPLIFY_function_churchstfinancial02a51904CustomMessage_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "churchstfinancial02a51904CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_churchstfinancial02a51904CustomMessage_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "churchstfinancial02a51904CustomMessage"
+        }
+      ]
+    },
     "AMPLIFY_function_churchstfinancial02a51904PostConfirmation_GROUP": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "churchstfinancial02a51904PostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_churchstfinancial02a51904PostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "churchstfinancial02a51904PostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_churchstfinancial02a51904PostConfirmation_s3Key": {
       "usedBy": [
         {
           "category": "function",

@@ -1,29 +1,29 @@
 import { Component } from '@angular/core';
-import {AmplifyAuthenticatorModule} from '@aws-amplify/ui-angular'
-import { Auth } from 'aws-amplify';
+import { AmplifyAuthenticatorModule, AuthenticatorService } from '@aws-amplify/ui-angular';
 
 @Component({
   selector: 'app-header',
   standalone: true,
+  imports: [AmplifyAuthenticatorModule],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'], // Fixed typo from styleUrl to styleUrls
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
   showAuthenticator = false; // Control the display of the authenticator
 
-  async signOut() {
-    try {
-      await Auth.signOut();
-      console.log('Signed out successfully');
-      this.showAuthenticator = false; // Hide authenticator on sign out
-    } catch (error) {
-      console.error('Error signing out: ', error);
+  constructor(public authenticator: AuthenticatorService) {}
+
+  // Update the parameter type to match the expected event structure
+  onAuthStateChange(event: { state: string }) {
+    if (event.state === 'authenticated') {
+      this.showAuthenticator = false; // Hide authenticator when authenticated
+    } else if (event.state === 'unauthenticated') {
+      this.showAuthenticator = true; // Show authenticator when unauthenticated
     }
   }
 
-  onAuthStateChange(authState: string) {
-    if (authState === 'authenticated') {
-      this.showAuthenticator = false; // Hide authenticator when authenticated
-    }
+  // Sign out method
+  signOut() {
+    this.authenticator.signOut();
   }
 }
