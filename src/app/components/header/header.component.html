@@ -10,15 +10,14 @@
     </nav>
   </div>
 
-  <amplify-authenticator *ngIf="showAuthenticator" (authStateChange)="onAuthStateChange($event)">
-    <ng-template amplifySlot="authenticated" let-user="user">
-      <div>
-        <h2>Welcome, {{ user.username }}</h2>
-        <button (click)="signOut()">Sign Out</button>
-      </div>
-    </ng-template>
-    <ng-template amplifySlot="unauthenticated">
-      <h2>Please Sign In</h2>
+  <amplify-authenticator>
+    <ng-template
+      amplifySlot="authenticated"
+      let-user="user"
+      let-signOut="signOut"
+    >
+      <h1>Welcome {{ user.username }}!</h1>
+      <button (click)="signOut()">Sign Out</button>
     </ng-template>
   </amplify-authenticator>
 </header>
