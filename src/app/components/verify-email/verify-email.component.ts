@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './verify-email.component.html',
-  styleUrl: './verify-email.component.css'
+  styleUrl: './verify-email.component.scss'
 })
 export class VerifyEmailComponent {
 

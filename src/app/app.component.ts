@@ -5,15 +5,12 @@ import outputs from '../../amplify_outputs.json';
 import { AmplifyAuthenticatorModule, AuthenticatorService } from '@aws-amplify/ui-angular';
 
 
-
-
-
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, AmplifyAuthenticatorModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'Church-St-Financial';

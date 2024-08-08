@@ -1,0 +1,24 @@
+<header class="header">
+  <div class="header-container">
+    <div class="logo">
+      <h1>Church St. Financial</h1>
+    </div>
+    <nav class="navigation">
+      <a routerLink="/">Home</a>
+      <a routerLink="/">Profile</a>
+      <button (click)="showAuthenticator = true">Login</button> <!-- Login button -->
+    </nav>
+  </div>
+
+  <amplify-authenticator *ngIf="showAuthenticator" (authStateChange)="onAuthStateChange($event)">
+    <ng-template amplifySlot="authenticated" let-user="user">
+      <div>
+        <h2>Welcome, {{ user.username }}</h2>
+        <button (click)="signOut()">Sign Out</button>
+      </div>
+    </ng-template>
+    <ng-template amplifySlot="unauthenticated">
+      <h2>Please Sign In</h2>
+    </ng-template>
+  </amplify-authenticator>
+</header>

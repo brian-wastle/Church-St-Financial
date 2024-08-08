@@ -1,0 +1,30 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-churchstfinancial-dev-86e49-authRole",
+      "UnauthRoleArn": "arn:aws:iam::992382834036:role/amplify-churchstfinancial-dev-86e49-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::992382834036:role/amplify-churchstfinancial-dev-86e49-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-churchstfinancial-dev-86e49-deployment",
+      "UnauthRoleName": "amplify-churchstfinancial-dev-86e49-unauthRole",
+      "StackName": "amplify-churchstfinancial-dev-86e49",
+      "StackId": "arn:aws:cloudformation:us-east-1:992382834036:stack/amplify-churchstfinancial-dev-86e49/5da3a7c0-5591-11ef-b0ea-127547dbbf89",
+      "AmplifyAppId": "d3q7uhzli0jaj9"
+    },
+    "categories": {
+      "auth": {
+        "churchstfinancial02a51904": {}
+      },
+      "function": {
+        "churchstfinancial02a51904CustomMessage": {
+          "REDIRECTURL": "",
+          "EMAILSUBJECT": "Confirm your Church St. Financial Investment Account",
+          "EMAILMESSAGE": "Please click the link below and follow the prompts to enable access to your Church St. Financial investment account:"
+        },
+        "churchstfinancial02a51904PostConfirmation": {
+          "GROUP": "Clients"
+        }
+      }
+    }
+  }
+}
