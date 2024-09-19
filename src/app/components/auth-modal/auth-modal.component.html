@@ -1,0 +1,35 @@
+<form *ngIf="isSignInMode; else logoutTemplate" [formGroup]="authForm" (ngSubmit)="login()">
+  <div>
+    <label for="username">Email:</label>
+    <input id="username" formControlName="username" required>
+    <div *ngIf="authForm.get('username')?.invalid && (authForm.get('username')?.touched || authForm.get('username')?.dirty)" class="error">
+      Username is required.
+    </div>
+  </div>
+
+  <div>
+    <label for="password">Password:</label>
+    <input id="password" type="password" formControlName="password" required>
+    <div *ngIf="authForm.get('password')?.invalid && (authForm.get('password')?.touched || authForm.get('password')?.dirty)" class="error">
+      Password is required.
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="error">
+    {{ errorMessage }}
+  </div>
+
+  <button type="submit" [disabled]="authForm.invalid || loading">
+    {{ loading ? 'Loading...' : 'Sign In' }}
+  </button>
+
+  <button type="button" (click)="toggleMode()">
+    Switch to Sign Out
+  </button>
+</form>
+
+<ng-template #logoutTemplate>
+  <p>You are logged in. Do you want to log out?</p>
+  <button (click)="logout()">Log Out</button>
+  <button (click)="toggleMode()">Switch to Sign In</button>
+</ng-template>
