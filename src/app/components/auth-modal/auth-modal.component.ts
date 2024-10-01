@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CognitoService } from '../../services/cognito/cognito.service';
@@ -7,39 +7,34 @@ import { CognitoService } from '../../services/cognito/cognito.service';
   selector: 'auth-modal',
   templateUrl: './auth-modal.component.html',
   styleUrls: ['./auth-modal.component.scss'],
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule],
+  standalone: true
 })
-export class AuthModalComponent implements OnInit {
+export class AuthModalComponent {
+  modalState: boolean = false;
   authForm: FormGroup;
-  isSignInMode: boolean = true;
-  errorMessage: string | null = null;
   loading: boolean = false;
-  loggedInSignal = signal(false); // Signal for login state
+  errorMessage: string | null = null;
 
-  constructor(private formBuilder: FormBuilder, private cognitoService: CognitoService) {
+  constructor(private formBuilder: FormBuilder, public cognitoService: CognitoService) {
     this.authForm = this.formBuilder.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      rememberDevice: [false] 
     });
-  }
-
-  ngOnInit(): void {
-    // Check initial login state from the CognitoService signal
-    this.isSignInMode = !this.cognitoService.hasValidToken();
   }
 
   login(): void {
     if (this.authForm.invalid) {
       return;
     }
-    const { username, password } = this.authForm.value;
+
+    const { username, password, rememberDevice } = this.authForm.value;
     this.loading = true;
     this.errorMessage = null;
-  
-    this.cognitoService.signIn(username, password).then(() => {
-      this.loading = false;
-      this.loggedInSignal.set(true); 
+
+    this.cognitoService.signIn(username, password, rememberDevice).then(() => {
+      this.loading = false; 
       this.closeModal(); 
     }).catch((err: any) => {
       this.loading = false;
@@ -47,19 +42,7 @@ export class AuthModalComponent implements OnInit {
     });
   }
 
-  logout(): void {
-    this.cognitoService.signOut(); 
-    this.loggedInSignal.set(false); 
-    this.closeModal(); 
-  }
-
-  toggleMode(): void {
-    this.isSignInMode = !this.isSignInMode;
-    this.authForm.reset();
-    this.errorMessage = null;
-  }
-
   closeModal(): void {
-    // Logic to close modal
+    this.modalState = false;
   }
 }

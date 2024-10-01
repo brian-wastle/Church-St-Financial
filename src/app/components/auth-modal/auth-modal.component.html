@@ -1,4 +1,4 @@
-<form *ngIf="isSignInMode; else logoutTemplate" [formGroup]="authForm" (ngSubmit)="login()">
+<form *ngIf="!cognitoService.hasValidToken()" [formGroup]="authForm" (ngSubmit)="login()">
   <div>
     <label for="username">Email:</label>
     <input id="username" formControlName="username" required>
@@ -19,17 +19,18 @@
     {{ errorMessage }}
   </div>
 
+  <div>
+    <label>
+      <input type="checkbox" formControlName="rememberDevice"> Remember Me on This Device
+    </label>
+  </div>
+
   <button type="submit" [disabled]="authForm.invalid || loading">
     {{ loading ? 'Loading...' : 'Sign In' }}
   </button>
-
-  <button type="button" (click)="toggleMode()">
-    Switch to Sign Out
-  </button>
 </form>
 
-<ng-template #logoutTemplate>
-  <p>You are logged in. Do you want to log out?</p>
-  <button (click)="logout()">Log Out</button>
-  <button (click)="toggleMode()">Switch to Sign In</button>
-</ng-template>
+<div *ngIf="cognitoService.hasValidToken()">
+  <h1>Welcome back!</h1>
+  <p>You are already logged in.</p>
+</div>

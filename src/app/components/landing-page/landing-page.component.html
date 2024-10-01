@@ -1,10 +1,9 @@
-<div *ngIf="isLoggedIn; else loggedOutTemplate">
-    <h1>Welcome!</h1>
-    <p>Your JWT token: {{ userData?.idToken }}</p>
-    <!-- Add any additional user data you want to display -->
-  </div>
-  
-  <ng-template #loggedOutTemplate>
-    <h1>Please log in to access this page.</h1>
-  </ng-template>
-  
+<div *ngIf="userData; else loggedOutTemplate">
+  <h1>Welcome!</h1>
+  <p>Your JWT token: {{ userData?.idToken }}</p>
+  <!-- Add any additional user data you want to display -->
+</div>
+
+<ng-template #loggedOutTemplate>
+  <h1>Please log in to access this page.</h1>
+</ng-template>

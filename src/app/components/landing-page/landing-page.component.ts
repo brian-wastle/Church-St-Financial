@@ -15,10 +15,7 @@ export class LandingPageComponent implements OnInit {
   constructor(private cognitoService: CognitoService) {}
 
   ngOnInit(): void {
-    this.userData = this.cognitoService.getCurrentUser(); 
-  }
-
-  get isLoggedIn(): boolean {
-    return !!this.userData; 
+    // Set initial user data from the currentUserSignal
+    this.userData = this.cognitoService.currentUserSignal();
   }
 }
