@@ -29,8 +29,3 @@
     {{ loading ? 'Loading...' : 'Sign In' }}
   </button>
 </form>
-
-<div *ngIf="cognitoService.hasValidToken()">
-  <h1>Welcome back!</h1>
-  <p>You are already logged in.</p>
-</div>

@@ -28,6 +28,7 @@ export class CognitoService {
       };
 
       if (this.isTokenValid(userData)) {
+        console.log("UserData:", userData);
         this.currentUserSignal.set(userData);
       } else {
         this.clearUserData();
@@ -47,40 +48,52 @@ export class CognitoService {
       user.authenticateUser(authenticationDetails, {
         onSuccess: (session) => this.handleAuthSuccess(session, username, rememberDevice, resolve, reject),
         onFailure: (err) => this.handleAuthFailure(err, reject),
-        newPasswordRequired: () => {
-          // Handle new password required case if needed
-        }
+        newPasswordRequired: () => this.handleNewPassword()
       });
     });
   }
 
   private handleAuthSuccess(session: any, username: string, rememberDevice: boolean, resolve: (value?: any) => void, reject: (reason?: any) => void): void {
     const tokens = {
-      idToken: session.getIdToken().getJwtToken(),
-      accessToken: session.getAccessToken().getJwtToken(),
-      refreshToken: session.getRefreshToken().getToken(),
-      tokenExpiration: session.getIdToken().getExpiration(),
+        idToken: session.getIdToken().getJwtToken(),
+        accessToken: session.getAccessToken().getJwtToken(),
+        refreshToken: session.getRefreshToken().getToken(),
+        tokenExpiration: session.getIdToken().getExpiration(),
     };
 
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('idToken', tokens.idToken);
-      localStorage.setItem('accessToken', tokens.accessToken);
-      localStorage.setItem('refreshToken', tokens.refreshToken);
-      localStorage.setItem('username', username);
+    // Extract the "sub" from the ID token
+    const payload = this.getJwtPayload(tokens.idToken);
+    const userSub = payload.sub;
 
-      if (rememberDevice) {
-        const expirationTime = 30 * 24 * 60 * 60 * 1000; // 30 days
-        localStorage.setItem('tokenExpiration', (Date.now() + expirationTime).toString());
-      }
+    if (typeof window !== 'undefined') {
+        localStorage.setItem('idToken', tokens.idToken);
+        localStorage.setItem('accessToken', tokens.accessToken);
+        localStorage.setItem('refreshToken', tokens.refreshToken);
+        localStorage.setItem('username', userSub); 
+
+        if (rememberDevice) {
+            const expirationTime = 30 * 24 * 60 * 60 * 1000; // 30 days
+            localStorage.setItem('tokenExpiration', (Date.now() + expirationTime).toString());
+        }
     }
-    this.currentUserSignal.set(tokens);
+
+    this.currentUserSignal.set({ ...tokens, username: userSub }); 
     resolve(session);
+  }
+
+  private getJwtPayload(token: string): any {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload;
   }
 
   private handleAuthFailure(err: any, reject: (reason?: any) => void): void {
     console.error("Authentication failed:", err.message);
     this.clearUserData();
     reject(err);
+  }
+
+  private handleNewPassword(): void {
+
   }
 
   signOut(): Promise<void> {
@@ -103,12 +116,12 @@ export class CognitoService {
         } else {
           console.warn("No current user found. Clearing user data.");
           this.clearUserData();
-          resolve(); // No user to sign out
+          resolve(); 
         }
       } else {
         console.warn("No valid token found. Clearing user data.");
         this.clearUserData();
-        resolve(); // No valid session to sign out
+        resolve(); 
       }
     });
 }

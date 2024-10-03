@@ -9,13 +9,6 @@ import { CognitoService } from '../../services/cognito/cognito.service';
   standalone: true,
   imports: [CommonModule]
 })
-export class LandingPageComponent implements OnInit {
-  userData: any = null;
-
-  constructor(private cognitoService: CognitoService) {}
-
-  ngOnInit(): void {
-    // Set initial user data from the currentUserSignal
-    this.userData = this.cognitoService.currentUserSignal();
-  }
+export class LandingPageComponent  {
+  constructor(public cognitoService: CognitoService) {}
 }

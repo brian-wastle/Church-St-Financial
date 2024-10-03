@@ -1,7 +1,7 @@
-<div *ngIf="userData; else loggedOutTemplate">
+<div *ngIf="cognitoService.currentUserSignal(); else loggedOutTemplate">
   <h1>Welcome!</h1>
-  <p>Your JWT token: {{ userData?.idToken }}</p>
-  <!-- Add any additional user data you want to display -->
+  <p>Your JWT token: {{ cognitoService.currentUserSignal()?.idToken }}</p>
+  <p>Your user ID: {{ cognitoService.currentUserSignal()?.username }}</p>
 </div>
 
 <ng-template #loggedOutTemplate>
