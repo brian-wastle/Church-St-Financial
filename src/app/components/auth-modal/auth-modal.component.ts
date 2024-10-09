@@ -2,15 +2,25 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CognitoService } from '../../services/cognito/cognito.service';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'auth-modal',
   templateUrl: './auth-modal.component.html',
   styleUrls: ['./auth-modal.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatCheckboxModule,
+    MatButtonModule
+  ],
   standalone: true
 })
-export class AuthModalComponent {
+export class AuthModalComponent implements OnInit{
   modalState: boolean = false;
   authForm: FormGroup;
   loading: boolean = false;
@@ -20,8 +30,13 @@ export class AuthModalComponent {
     this.authForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      rememberDevice: [false] 
+      rememberDevice: [false]
     });
+    this.cognitoService.loadUserFromLocalStorage();
+  }
+
+  ngOnInit(): void {
+    
   }
 
   login(): void {

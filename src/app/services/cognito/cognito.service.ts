@@ -19,14 +19,14 @@ export class CognitoService {
     this.loadUserFromLocalStorage();
   }
 
-  private loadUserFromLocalStorage(): void {
+  public loadUserFromLocalStorage(): void {
     if (typeof window !== 'undefined') {
       const userData = {
-        idToken: localStorage.getItem('idToken'),
-        username: localStorage.getItem('username'),
-        expiration: localStorage.getItem('tokenExpiration'),
+        idToken: sessionStorage.getItem('idToken') || localStorage.getItem('idToken'),
+        username: sessionStorage.getItem('username') || localStorage.getItem('username'),
+        expiration: localStorage.getItem('tokenExpiration'), // Only applicable to localStorage
       };
-
+  
       if (this.isTokenValid(userData)) {
         console.log("UserData:", userData);
         this.currentUserSignal.set(userData);
@@ -37,13 +37,16 @@ export class CognitoService {
   }
 
   private isTokenValid({ idToken, expiration }: { idToken: string | null, expiration: string | null }): boolean {
-    return !!(idToken && expiration && Date.now() < Number(expiration));
+    if (localStorage.getItem('tokenExpiration')) {
+      return !!(idToken && expiration && Date.now() < Number(expiration));
+    }
+    return !!idToken;
   }
 
   signIn(username: string, password: string, rememberDevice: boolean): Promise<any> {
     const user = new CognitoUser({ Username: username, Pool: this.cognitoUserPool });
     const authenticationDetails = new AuthenticationDetails({ Username: username, Password: password });
-
+  
     return new Promise((resolve, reject) => {
       user.authenticateUser(authenticationDetails, {
         onSuccess: (session) => this.handleAuthSuccess(session, username, rememberDevice, resolve, reject),
@@ -52,34 +55,44 @@ export class CognitoService {
       });
     });
   }
-
+  
   private handleAuthSuccess(session: any, username: string, rememberDevice: boolean, resolve: (value?: any) => void, reject: (reason?: any) => void): void {
     const tokens = {
-        idToken: session.getIdToken().getJwtToken(),
-        accessToken: session.getAccessToken().getJwtToken(),
-        refreshToken: session.getRefreshToken().getToken(),
-        tokenExpiration: session.getIdToken().getExpiration(),
+      idToken: session.getIdToken().getJwtToken(),
+      accessToken: session.getAccessToken().getJwtToken(),
+      refreshToken: session.getRefreshToken().getToken(),
+      tokenExpiration: session.getIdToken().getExpiration(),
     };
-
+  
     // Extract the "sub" from the ID token
     const payload = this.getJwtPayload(tokens.idToken);
     const userSub = payload.sub;
-
+  
     if (typeof window !== 'undefined') {
+      if (rememberDevice) {
+        // Store tokens in localStorage for 30 days
         localStorage.setItem('idToken', tokens.idToken);
         localStorage.setItem('accessToken', tokens.accessToken);
         localStorage.setItem('refreshToken', tokens.refreshToken);
-        localStorage.setItem('username', userSub); 
-
-        if (rememberDevice) {
-            const expirationTime = 30 * 24 * 60 * 60 * 1000; // 30 days
-            localStorage.setItem('tokenExpiration', (Date.now() + expirationTime).toString());
-        }
+        localStorage.setItem('username', userSub);
+        
+        const expirationTime = 30 * 24 * 60 * 60 * 1000; // 30 days
+        localStorage.setItem('tokenExpiration', (Date.now() + expirationTime).toString());
+      } else {
+        // Store tokens in sessionStorage for current session only
+        sessionStorage.setItem('idToken', tokens.idToken);
+        sessionStorage.setItem('accessToken', tokens.accessToken);
+        sessionStorage.setItem('refreshToken', tokens.refreshToken);
+        sessionStorage.setItem('username', userSub);
+        
+        // No need for token expiration in sessionStorage since it lasts only for the session
+      }
     }
-
-    this.currentUserSignal.set({ ...tokens, username: userSub }); 
+  
+    this.currentUserSignal.set({ ...tokens, username: userSub });
     resolve(session);
   }
+  
 
   private getJwtPayload(token: string): any {
       const payload = JSON.parse(atob(token.split('.')[1]));

@@ -1,31 +1,27 @@
 <form *ngIf="!cognitoService.hasValidToken()" [formGroup]="authForm" (ngSubmit)="login()">
-  <div>
-    <label for="username">Email:</label>
-    <input id="username" formControlName="username" required>
-    <div *ngIf="authForm.get('username')?.invalid && (authForm.get('username')?.touched || authForm.get('username')?.dirty)" class="error">
+  <mat-form-field appearance="fill" hideRequiredMarker="true">
+    <mat-label>Email:</mat-label>
+    <input matInput formControlName="username" placeholder="Email" required>
+    <mat-error *ngIf="authForm.get('username')?.invalid && (authForm.get('username')?.touched || authForm.get('username')?.dirty)">
       Username is required.
-    </div>
-  </div>
+    </mat-error>
+  </mat-form-field>
 
-  <div>
-    <label for="password">Password:</label>
-    <input id="password" type="password" formControlName="password" required>
-    <div *ngIf="authForm.get('password')?.invalid && (authForm.get('password')?.touched || authForm.get('password')?.dirty)" class="error">
+  <mat-form-field appearance="fill">
+    <mat-label>Password:</mat-label>
+    <input matInput type="password" formControlName="password" required>
+    <mat-error *ngIf="authForm.get('password')?.invalid && (authForm.get('password')?.touched || authForm.get('password')?.dirty)">
       Password is required.
-    </div>
-  </div>
+    </mat-error>
+  </mat-form-field>
 
   <div *ngIf="errorMessage" class="error">
     {{ errorMessage }}
   </div>
 
-  <div>
-    <label>
-      <input type="checkbox" formControlName="rememberDevice"> Remember Me on This Device
-    </label>
-  </div>
+  <mat-checkbox formControlName="rememberDevice">Remember Me on This Device</mat-checkbox>
 
-  <button type="submit" [disabled]="authForm.invalid || loading">
+  <button mat-raised-button type="submit" [disabled]="authForm.invalid || loading">
     {{ loading ? 'Loading...' : 'Sign In' }}
   </button>
 </form>
