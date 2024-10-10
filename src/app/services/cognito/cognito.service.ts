@@ -28,7 +28,6 @@ export class CognitoService {
       };
   
       if (this.isTokenValid(userData)) {
-        console.log("UserData:", userData);
         this.currentUserSignal.set(userData);
       } else {
         this.clearUserData();

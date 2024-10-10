@@ -2,6 +2,9 @@
   <h1>Welcome!</h1>
   <p>Your JWT token: {{ cognitoService.currentUserSignal()?.idToken }}</p>
   <p>Your user ID: {{ cognitoService.currentUserSignal()?.username }}</p>
+
+  <!-- Include the data display component -->
+  <portfolio-display-list></portfolio-display-list>
 </div>
 
 <ng-template #loggedOutTemplate>

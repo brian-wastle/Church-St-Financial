@@ -1,0 +1,9 @@
+<div *ngIf="responseData; else errorTemplate">
+    <h2>API Response:</h2>
+    <pre>{{ responseData }}</pre>
+  </div>
+  
+  <ng-template #errorTemplate>
+    <h2>Error:</h2>
+    <p>{{ error }}</p>
+  </ng-template>
