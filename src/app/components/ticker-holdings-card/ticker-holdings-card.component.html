@@ -1,0 +1,8 @@
+<p-card class="card" [styleClass]="'holding-data-card'">
+    <h2>{{ ticker }}</h2>
+    <div class="holding-data">
+        <p>Balance: {{ balance }}</p>
+        <p>Price: {{ formatCurrency(price) }}</p>
+        <p>Value: {{ formatCurrency(totalValue) }}</p>
+    </div>
+</p-card>

@@ -1,2 +1,32 @@
-<app-header></app-header>
-<router-outlet/>
+<mat-sidenav-container class="sidenav-container">
+
+    <mat-sidenav
+        #sidenav
+        [mode]="isMobileView() ? 'over' : 'side'"  
+        [opened]="!isMobileView() && sidenavOpened" 
+        [disableClose]="disableClose" 
+        class="fixed-sidebar"
+        (closed)="sidenavOpened = false"
+        (opened)="sidenavOpened = true"
+    >
+        <p>Sidebar content</p>
+    </mat-sidenav>
+  
+    <button
+        *ngIf="isMobileView() && !sidenavOpened"  
+        mat-icon-button
+        (click)="toggleSidenav()"
+        class="toggle-sidenav-button"
+    >
+        <mat-icon>menu</mat-icon> 
+    </button>
+  
+    <mat-sidenav-content>
+        <app-header></app-header>
+        <div class="main-content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+    
+</mat-sidenav-container>
+  

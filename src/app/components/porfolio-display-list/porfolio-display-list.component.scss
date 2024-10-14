@@ -1,0 +1,15 @@
+.portfolio-list-wrapper {
+    max-width: 80%;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .portfolio-list-wrapper {
+      max-width: 100%;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }

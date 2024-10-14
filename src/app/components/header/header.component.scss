@@ -1,0 +1,52 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  button {
+    margin-left: 10px;
+  }
+  
+  /* Styling the inline auth form */
+  .auth-form-inline {
+    display: flex;
+    align-items: center;
+  }
+  
+  .auth-form-inline .p-field {
+    margin-right: 10px;
+  }
+  
+  .auth-form-inline .p-field-checkbox {
+    margin-right: 10px;
+  }
+  
+  .auth-form-inline button {
+    margin-left: 10px;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .auth-form-inline {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .auth-form-inline .p-field,
+    .auth-form-inline .p-field-checkbox {
+      margin-bottom: 10px;
+    }
+  
+    .auth-form-inline button {
+      width: 100%;
+    }
+  }
+  

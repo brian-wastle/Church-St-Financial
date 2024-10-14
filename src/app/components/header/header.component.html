@@ -3,9 +3,8 @@
     <!-- Show the Log Out button when the user is logged in -->
     <button *ngIf="isLoggedIn" (click)="logout()">Log Out</button>
     <!-- Show the Login button when the user is not logged in -->
-    <button *ngIf="!isLoggedIn" (click)="toggleAuthModal()">Log In</button>
+    <button *ngIf="!isLoggedIn" (click)="toggleLoginForm()">Log In</button>
   </nav>
 </header>
 
-<!-- Include auth-modal component -->
-<auth-modal *ngIf="showAuthModal"></auth-modal>
+<auth-modal *ngIf="showLoginForm"></auth-modal>

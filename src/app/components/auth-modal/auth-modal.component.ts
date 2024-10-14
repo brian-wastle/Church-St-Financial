@@ -1,27 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CognitoService } from '../../services/cognito/cognito.service';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatButtonModule } from '@angular/material/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { CheckboxModule } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
 
 @Component({
   selector: 'auth-modal',
   templateUrl: './auth-modal.component.html',
   styleUrls: ['./auth-modal.component.scss'],
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatCheckboxModule,
-    MatButtonModule
+    InputTextModule,
+    PasswordModule,
+    CheckboxModule,
+    ButtonModule,
+    MessageModule
   ],
   standalone: true
 })
-export class AuthModalComponent implements OnInit{
-  modalState: boolean = false;
+export class AuthModalComponent implements OnInit {
   authForm: FormGroup;
   loading: boolean = false;
   errorMessage: string | null = null;
@@ -35,9 +37,7 @@ export class AuthModalComponent implements OnInit{
     this.cognitoService.loadUserFromLocalStorage();
   }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   login(): void {
     if (this.authForm.invalid) {
@@ -49,15 +49,10 @@ export class AuthModalComponent implements OnInit{
     this.errorMessage = null;
 
     this.cognitoService.signIn(username, password, rememberDevice).then(() => {
-      this.loading = false; 
-      this.closeModal(); 
+      this.loading = false;
     }).catch((err: any) => {
       this.loading = false;
       this.errorMessage = err.message;
     });
-  }
-
-  closeModal(): void {
-    this.modalState = false;
   }
 }

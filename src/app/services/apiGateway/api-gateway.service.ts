@@ -12,7 +12,7 @@ export class ApiService {
 
   constructor(private http: HttpClient, private cognitoService: CognitoService) {}
 
-  getData(): Observable<any> {
+  getPortfolio(): Observable<any> {
     const currentUser = this.cognitoService.currentUserSignal(); // Get current user data
     const userID: string = currentUser?.username; // Extract user ID
     const idToken: string = currentUser?.idToken || currentUser?.refreshToken;
@@ -27,12 +27,14 @@ export class ApiService {
     });
 
     const body = {
-      userID: userID
+      userID: '94b8a4d8-20b1-7002-c209-5b0f15ba6d94'
     };
     const reqUrl = `${this.apiUrl}/getPortfolio`; // Removed trailing slash
-    console.log('Request URL:', reqUrl);
-    console.log('Request Headers:', headers);
-    console.log('Request Body:', body);
     return this.http.post<any>(reqUrl, body, { headers });
   }
+
+  calcHoldingValue(balance: number, price: number): number {
+    return balance * price;
+  }
+
 }

@@ -1,27 +1,30 @@
-<form *ngIf="!cognitoService.hasValidToken()" [formGroup]="authForm" (ngSubmit)="login()">
-  <mat-form-field appearance="fill" hideRequiredMarker="true">
-    <mat-label>Email:</mat-label>
-    <input matInput formControlName="username" placeholder="Email" required>
-    <mat-error *ngIf="authForm.get('username')?.invalid && (authForm.get('username')?.touched || authForm.get('username')?.dirty)">
+<form *ngIf="!cognitoService.hasValidToken()" [formGroup]="authForm" (ngSubmit)="login()" class="auth-form-inline">
+  <div class="p-field">
+    <label for="username">Email:</label>
+    <input id="username" type="text" pInputText formControlName="username" placeholder="Email" required />
+    <small *ngIf="authForm.get('username')?.invalid && (authForm.get('username')?.touched || authForm.get('username')?.dirty)" class="p-error">
       Username is required.
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Password:</mat-label>
-    <input matInput type="password" formControlName="password" required>
-    <mat-error *ngIf="authForm.get('password')?.invalid && (authForm.get('password')?.touched || authForm.get('password')?.dirty)">
-      Password is required.
-    </mat-error>
-  </mat-form-field>
-
-  <div *ngIf="errorMessage" class="error">
-    {{ errorMessage }}
+    </small>
   </div>
 
-  <mat-checkbox formControlName="rememberDevice">Remember Me on This Device</mat-checkbox>
+  <div class="p-field">
+    <label for="password">Password:</label>
+    <p-password id="password" formControlName="password" [toggleMask]="true" [feedback]="false" placeholder="Password" required></p-password>
+    <small *ngIf="authForm.get('password')?.invalid && (authForm.get('password')?.touched || authForm.get('password')?.dirty)" class="p-error">
+      Password is required.
+    </small>
+  </div>
 
-  <button mat-raised-button type="submit" [disabled]="authForm.invalid || loading">
-    {{ loading ? 'Loading...' : 'Sign In' }}
-  </button>
+  <div class="p-field-checkbox">
+    <p-checkbox formControlName="rememberDevice" binary="true"></p-checkbox>
+    <label for="rememberDevice">Remember Me</label>
+  </div>
+
+  <div class="p-field">
+    <button pButton type="submit" label="{{ loading ? 'Loading...' : 'Sign In' }}" [disabled]="authForm.invalid || loading"></button>
+  </div>
+
+  <div *ngIf="errorMessage" class="p-message p-message-error">
+    <span>{{ errorMessage }}</span>
+  </div>
 </form>

@@ -1,4 +1,95 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-indigo/theme.css";
+@import "primeicons/primeicons.css";
+@import "primeng/resources/primeng.css";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+  
+
+  .sidenav-container {
+    display: flex;
+    flex-direction: column; 
+    height: 100vh; 
+  }
+  
+
+  .fixed-sidebar {
+    width: 20%; 
+    min-width: 250px;
+    max-width: 350px;
+    background: #f4f4f4;
+    padding: 16px;
+  }
+  
+
+  app-header {
+    height: 80px; 
+    background-color: #00796b;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 16px;
+    border: none; 
+    box-shadow: none; 
+  }
+  
+
+  mat-sidenav-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: none; 
+    box-shadow: none; 
+  }
+  
+
+  .main-content {
+    flex: 1;
+    padding: 16px; 
+    overflow: auto;
+    box-sizing: border-box;
+    border: none;
+    box-shadow: none;
+  }
+  
+  .fixed-sidebar p {
+    color: #333;
+    font-size: 16px;
+  }
+  
+  @media (max-width: 768px) {
+    .fixed-sidebar {
+      width: 100%; 
+      position: absolute;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      z-index: 999;
+    }
+  
+    .main-content {
+      padding: 16px; 
+    }
+  }
+  
+
+.card {
+  max-width: 100%; 
+  box-sizing: border-box;
+  
+  h2 {
+    font-family: 'Raleway', 'Quicksand' !important;
+    color: #003366;
+  }
+
+  p {
+    font-family: 'Quicksand', sans-serif !important;
+  }
+}

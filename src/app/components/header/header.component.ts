@@ -1,34 +1,51 @@
-import { Component, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
-import { AuthModalComponent } from '../auth-modal/auth-modal.component';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CognitoService } from '../../services/cognito/cognito.service';
+import { AuthModalComponent } from '../auth-modal/auth-modal.component';
+import { effect } from '@angular/core';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [CommonModule, AuthModalComponent]
+  imports: [AuthModalComponent, CommonModule]
 })
-export class HeaderComponent {
-  showAuthModal: boolean = false;
+export class HeaderComponent implements OnInit {
+  showLoginForm: boolean = false;
+  isLoggedIn: boolean = false;
 
-  @ViewChild(AuthModalComponent) authModal!: AuthModalComponent;
+  // Tracking login state through currentUserSignal
+  constructor(private cognitoService: CognitoService) {
+    effect(() => {
+      const currentUser = this.cognitoService.currentUserSignal();
+      // The component's login state depends on currentUserSignal
+      this.isLoggedIn = !!currentUser && !!currentUser.idToken;
+    });
+  }
 
-  constructor(private cognitoService: CognitoService) {}
-
-  get isLoggedIn(): boolean {
-    return this.cognitoService.hasValidToken(); // Check if the user has a valid token
+  ngOnInit(): void {
+    this.validateSessionOnLoad();
+  }
+  
+  validateSessionOnLoad(): void {
+    // Check if session is valid on page load
+    this.cognitoService.validateSession().then(isValid => {
+      if (!isValid) {
+        this.cognitoService.clearUserData();
+      }
+    }).catch(() => {
+      this.cognitoService.clearUserData();
+    });
   }
 
   logout(): void {
     if (this.isLoggedIn) {
-      this.cognitoService.signOut(); // Log out the user
-      // Optionally, you can trigger any additional actions, like notifying the user or redirecting
+      this.cognitoService.signOut();
     }
   }
 
-  toggleAuthModal(): void {
-    this.showAuthModal = !this.showAuthModal; // Toggle the modal visibility
+  toggleLoginForm(): void {
+    this.showLoginForm = !this.showLoginForm;
   }
 }

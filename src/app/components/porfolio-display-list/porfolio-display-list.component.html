@@ -1,9 +1,12 @@
-<div *ngIf="responseData; else errorTemplate">
-    <h2>API Response:</h2>
-    <pre>{{ responseData }}</pre>
+<div *ngIf="!error && holdingsData.length > 0">
+  <div class="portfolio-list-wrapper">
+    <div *ngFor="let holding of holdingsData" class="mb-3">
+      <ticker-holdings-card
+        [ticker]="holding.ticker"
+        [balance]="holding.balance"
+        [price]="holding.price"
+        [totalValue]="holding.totalValue">
+      </ticker-holdings-card>
+    </div>
   </div>
-  
-  <ng-template #errorTemplate>
-    <h2>Error:</h2>
-    <p>{{ error }}</p>
-  </ng-template>
+</div>
