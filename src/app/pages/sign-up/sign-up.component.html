@@ -1,0 +1,55 @@
+<p-steps [model]="steps" [(activeIndex)]="activeStep"></p-steps>
+
+<!-- Sign-up Form (Step 1) -->
+<div *ngIf="activeStep === 0">
+  <form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+    <div class="p-field">
+      <label for="email">Email</label>
+      <input id="email" pInputText type="email" placeholder="Enter your email" formControlName="email" />
+    </div>
+
+    <div class="p-field">
+      <label for="phone_number">Phone Number</label>
+      <input id="phone_number" pInputText type="tel" placeholder="Enter your phone number" formControlName="phone_number" />
+    </div>
+
+    <div class="p-field">
+      <label for="password">Password</label>
+      <p-password id="password" formControlName="password" [toggleMask]="true" [feedback]="true" placeholder="Create a password"></p-password>
+    </div>
+
+    <div class="p-field">
+      <label for="givenName">Given Name</label>
+      <input id="givenName" pInputText placeholder="Enter your given name" formControlName="givenName" />
+    </div>
+
+    <div class="p-field">
+      <label for="familyName">Family Name</label>
+      <input id="familyName" pInputText placeholder="Enter your family name" formControlName="familyName" />
+    </div>
+
+    <div class="p-field">
+      <label for="birthdate">Birthdate</label>
+      <input id="birthdate" type="date" pInputText formControlName="birthdate" placeholder="Select your birthdate" />
+    </div>
+
+    <div class="p-field">
+      <label for="address">Address</label>
+      <input id="address" pInputText placeholder="Enter your address" formControlName="address" />
+    </div>
+
+    <button pButton type="submit" label="Sign Up" [disabled]="signUpForm.invalid"></button>
+  </form>
+</div>
+
+<!-- Verification Code Form (Step 2) -->
+<div *ngIf="activeStep === 1">
+  <form [formGroup]="verificationForm" (ngSubmit)="verifyCode()">
+    <div class="p-field">
+      <label for="verificationCode">Verification Code</label>
+      <input id="verificationCode" pInputText type="text" placeholder="Enter the verification code" formControlName="verificationCode" />
+    </div>
+
+    <button pButton type="submit" label="Verify Code" [disabled]="verificationForm.invalid"></button>
+  </form>
+</div>

@@ -1,1 +1,8 @@
-<p>portfolio-overview works!</p>
+<div *ngIf="cognitoService.currentUserSignal(); else loggedOutTemplate">
+    <h1>Welcome!</h1>
+    <portfolio-display-list></portfolio-display-list>
+  </div> 
+  
+  <ng-template #loggedOutTemplate>
+    <h1>Please log in to access this page.</h1>
+  </ng-template>

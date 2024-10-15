@@ -1,52 +1,70 @@
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
   
-  nav {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
+nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
   
   button {
-    margin-left: 10px;
-  }
+  margin-left: 10px;
+}
+
+
   
-  /* Styling the inline auth form */
+
+/* Styling the inline auth form */
+.auth-form-inline {
+  display: flex;
+  align-items: center;
+}
+
+.auth-form-inline .p-field {
+  margin-right: 10px;
+}
+
+.auth-form-inline .p-field-checkbox {
+  margin-right: 10px;
+}
+
+.auth-form-inline button {
+  margin-left: 10px;
+}
+
+.p-button {
+  font-size: 14px; /* Match the font size with the header button */
+  padding: 6px 12px; /* Consistent padding across components */
+  border-radius: 4px; /* Optional: Add this for consistent button rounding */
+}
+  
+
+button {
+  margin-left: 10px;
+  padding: 6px 12px; /* Match the padding of the auth modal buttons */
+  font-size: 14px; /* Match the font size of auth modal buttons */
+  border-radius: 4px; /* Optional: Consistent rounding across buttons */
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
   .auth-form-inline {
-    display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
   }
-  
-  .auth-form-inline .p-field {
-    margin-right: 10px;
-  }
-  
+
+  .auth-form-inline .p-field,
   .auth-form-inline .p-field-checkbox {
-    margin-right: 10px;
+    margin-bottom: 10px;
   }
-  
+
   .auth-form-inline button {
-    margin-left: 10px;
+    width: 100%;
   }
-  
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    .auth-form-inline {
-      flex-direction: column;
-      align-items: stretch;
-    }
-  
-    .auth-form-inline .p-field,
-    .auth-form-inline .p-field-checkbox {
-      margin-bottom: 10px;
-    }
-  
-    .auth-form-inline button {
-      width: 100%;
-    }
-  }
+}
   

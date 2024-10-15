@@ -1,10 +1,8 @@
 <header>
-  <nav>
-    <!-- Show the Log Out button when the user is logged in -->
-    <button *ngIf="isLoggedIn" (click)="logout()">Log Out</button>
-    <!-- Show the Login button when the user is not logged in -->
-    <button *ngIf="!isLoggedIn" (click)="toggleLoginForm()">Log In</button>
-  </nav>
+  <div class="auth-buttons">
+    <p-button icon="pi pi-user" label="Log Out" size="small" *ngIf="isLoggedIn" (click)="logout()" />
+    <p-button icon="pi pi-user" label="Log In" size="small" *ngIf="!isLoggedIn && !showLoginForm" (click)="toggleLoginForm()" />
+  </div>
 </header>
 
 <auth-modal *ngIf="showLoginForm"></auth-modal>

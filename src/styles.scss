@@ -1,3 +1,4 @@
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
 @import "primeng/resources/themes/lara-light-indigo/theme.css";
 @import "primeicons/primeicons.css";
 @import "primeng/resources/primeng.css";
@@ -9,6 +10,7 @@ html, body {
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
+  background-color: #f8f8f7;
 }
   
 
@@ -23,14 +25,13 @@ html, body {
     width: 20%; 
     min-width: 250px;
     max-width: 350px;
-    background: #f4f4f4;
     padding: 16px;
   }
   
 
   app-header {
     height: 80px; 
-    background-color: #00796b;
+    background-color: #e3f2fd;
     color: white;
     display: flex;
     justify-content: flex-end;
@@ -92,4 +93,13 @@ html, body {
   p {
     font-family: 'Quicksand', sans-serif !important;
   }
+}
+
+
+.p-button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  background-color: #003366;
+  color: white;
 }

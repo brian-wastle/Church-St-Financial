@@ -16,7 +16,11 @@
 
 .auth-form-inline button {
     margin-left: 10px;
+    padding: 6px 12px;
+    font-size: 14px; 
+    border-radius: 4px;
 }
+
 
 .auth-form-inline label {
     margin-right:10px;
@@ -26,16 +30,11 @@
 .p-inputtext,
 .p-password {
   width: auto; /* Adjust width to fit the layout */
+  background-color: white;
 }
 
 .p-checkbox {
     margin-left: 5px;
-}
-
-/* Button Styling */
-button {
-    padding: 6px 12px;
-    font-size: 14px;
 }
 
 .p-error {
@@ -48,4 +47,3 @@ button {
     margin-top: 10px;
     color: red;
 }
-  

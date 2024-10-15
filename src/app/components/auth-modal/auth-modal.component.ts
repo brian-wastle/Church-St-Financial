@@ -7,6 +7,7 @@ import { PasswordModule } from 'primeng/password';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
+import { effect } from '@angular/core';
 
 @Component({
   selector: 'auth-modal',
@@ -27,6 +28,7 @@ export class AuthModalComponent implements OnInit {
   authForm: FormGroup;
   loading: boolean = false;
   errorMessage: string | null = null;
+  hasValidSession: boolean = false;  // To track session validity
 
   constructor(private formBuilder: FormBuilder, public cognitoService: CognitoService) {
     this.authForm = this.formBuilder.group({
@@ -34,7 +36,12 @@ export class AuthModalComponent implements OnInit {
       password: ['', Validators.required],
       rememberDevice: [false]
     });
-    this.cognitoService.loadUserFromLocalStorage();
+
+    // Use the signal to observe the current user session status
+    effect(() => {
+      const currentUser = this.cognitoService.currentUserSignal();
+      this.hasValidSession = !!currentUser && !!currentUser.idToken;  // Set the session status
+    });
   }
 
   ngOnInit(): void {}
