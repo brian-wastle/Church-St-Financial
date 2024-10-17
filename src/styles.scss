@@ -7,82 +7,82 @@ html, body {
   height: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  overflow-x: hidden;
+  overflow: hidden; /* Prevents scrolling on body */
   display: flex;
   flex-direction: column;
   background-color: #f8f8f7;
 }
-  
 
-  .sidenav-container {
-    display: flex;
-    flex-direction: column; 
-    height: 100vh; 
-  }
-  
+/* Container for the entire layout */
+.sidenav-container {
+  display: flex;
+  flex-direction: column; 
+  height: 100vh; /* Full viewport height */
+}
 
+.fixed-sidebar {
+  width: 20%;
+  min-width: 250px;
+  max-width: 350px;
+  padding: 16px;
+}
+
+app-header {
+  height: 80px;
+  background-color: #e3f2fd;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 16px;
+  border: none;
+  box-shadow: none;
+}
+
+/* Sidenav content should stretch to fill the available height */
+mat-sidenav-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  box-shadow: none;
+}
+
+/* Ensuring that only the main content area scrolls */
+.main-content {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto; /* Enable vertical scrolling only */
+  box-sizing: border-box;
+  border: none;
+  box-shadow: none;
+}
+
+/* Styling for the fixed sidebar */
+.fixed-sidebar p {
+  color: #333;
+  font-size: 16px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
   .fixed-sidebar {
-    width: 20%; 
-    min-width: 250px;
-    max-width: 350px;
-    padding: 16px;
+    width: 100%;
+    position: absolute;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 999;
   }
-  
-
-  app-header {
-    height: 80px; 
-    background-color: #e3f2fd;
-    color: white;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0 16px;
-    border: none; 
-    box-shadow: none; 
-  }
-  
-
-  mat-sidenav-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    border: none; 
-    box-shadow: none; 
-  }
-  
 
   .main-content {
-    flex: 1;
-    padding: 16px; 
-    overflow: auto;
-    box-sizing: border-box;
-    border: none;
-    box-shadow: none;
+    padding: 16px;
   }
-  
-  .fixed-sidebar p {
-    color: #333;
-    font-size: 16px;
-  }
-  
-  @media (max-width: 768px) {
-    .fixed-sidebar {
-      width: 100%; 
-      position: absolute;
-      height: 100vh;
-      top: 0;
-      left: 0;
-      z-index: 999;
-    }
-  
-    .main-content {
-      padding: 16px; 
-    }
-  }
-  
+}
 
+/* Card styling */
 .card {
-  max-width: 100%; 
+  max-width: 100%;
   box-sizing: border-box;
   
   h2 {
@@ -95,7 +95,7 @@ html, body {
   }
 }
 
-
+/* PrimeNG button styling */
 .p-button {
   padding: 6px 12px;
   font-size: 14px;
