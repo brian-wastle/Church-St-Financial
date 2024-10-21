@@ -6,11 +6,13 @@ import { ApiService } from '../../services/apiGateway/api-gateway.service';
 import { ChartModule } from 'primeng/chart';
 import { SkeletonModule } from 'primeng/skeleton';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { FieldsetModule } from 'primeng/fieldset';
+import { StockResponse, TickerMetadata, PriceData } from '../../models/api-response.model';
 
 @Component({
   selector: 'app-ticker-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ChartModule, SelectButtonModule, SkeletonModule],
+  imports: [CommonModule, ReactiveFormsModule, ChartModule, SelectButtonModule, SkeletonModule, FieldsetModule],
   templateUrl: './ticker-page.component.html',
   styleUrls: ['./ticker-page.component.scss'],
   providers: [DatePipe]
@@ -18,6 +20,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 export class TickerPageComponent implements OnInit {
   tickerData: any = null;
   tickerName: string | null = "";
+  tickerMetadata: TickerMetadata | null = null;
   errorMessage: string = '';
   chartData: any;
   chartOptions: any;
@@ -57,7 +60,7 @@ export class TickerPageComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.updateChartSize();  // Update chart size on window resize
+    this.updateChartSize();
   }
 
   updateChartSize() {
@@ -65,7 +68,6 @@ export class TickerPageComponent implements OnInit {
       const windowWidth = window.innerWidth;
       const windowHeight = window.innerHeight;
   
-      // Adjust width and height based on window size
       this.chartWidth = `${windowWidth * 0.8}px`;  
       this.chartHeight = `${windowHeight * 0.4}px`;
     }
@@ -74,11 +76,16 @@ export class TickerPageComponent implements OnInit {
   getStock(ticker: string) {
     this.isLoading = true;
     this.apiService.getSingleStock(ticker).subscribe({
-      next: (data) => {
-        this.tickerData = data;
+      next: (data: StockResponse) => {
+        this.tickerData = data;        
+
+        this.tickerName = String(data.priceData[0]?.name);
+        const { sector, industry, website, description } = data.metadata[0]; 
+        this.tickerMetadata = { sector, industry, website, description };
+  
         this.errorMessage = '';
         this.prepareChartData();
-        console.log("Data: ",data);
+        console.log("Filtered Metadata: ", this.tickerMetadata);
         this.isLoading = false;
       },
       error: (error) => {
@@ -88,116 +95,128 @@ export class TickerPageComponent implements OnInit {
       }
     });
   }
+  
+  
 
   prepareChartData() {
-    if (this.tickerData && this.tickerData.data) {
-      const filteredData = this.filterDataByRange(this.tickerData.data);
+    if (this.tickerData && this.tickerData.priceData) {
+        const filteredData = this.filterDataByRange(this.tickerData.priceData);
+        const labels = filteredData.map((item: PriceData) => {
+            const formattedDate = this.datePipe.transform(item.date, 'MM/dd');
+            return formattedDate; // item.date is now a string
+        });
 
-      const labels = filteredData.map((item: any) => {
-        const formattedDate = this.datePipe.transform(item.date.S, 'MM/dd');
-        return formattedDate;
-      });
+        const prices = filteredData.map((item: PriceData) => {
+            return item.price; // item.price is now a number
+        });
 
-      const prices = filteredData.map((item: any) => {
-        return parseFloat(item.price.N);
-      });
-
-      this.chartData = {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Stock Price',
-            data: prices,
-            fill: false,
-            borderColor: '#42A5F5',
-            tension: 0.1
-          }
-        ]
-      };
-
-      this.chartOptions = {
-        responsive: true,
-        maintainAspectRatio: false,
-        
-        plugins: {
-          legend: {
-            display: false
-          }
-        },
-        
-        layout: {
-          padding: {
-            left: 20,
-            right: 20,
-            top: 30,
-            bottom: 30
-          }
-        },
-        
-        scales: {
-          x: {
-            ticks: {
-              maxRotation: 45,
-              minRotation: 0,
-              padding: 10
-            },
-            grid: {
-              display: true,
-              drawOnChartArea: true
-            }
-          },
-          y: {
-            ticks: {
-              beginAtZero: true,
-              padding: 10
-            },
-            grid: {
-              display: true,
-              drawOnChartArea: true
-            }
-          }
+        if (labels.length === 0 || prices.length === 0) {
+            console.error('No data available for the chart');
+            return; // No data to display
         }
-      };
-    }
-  }
 
-  filterDataByRange(data: any[]) {
+        this.chartData = {
+            labels: labels,
+            datasets: [
+                {
+                    label: this.tickerName,
+                    data: prices,
+                    fill: false,
+                    borderColor: '#42A5F5',
+                    tension: 0.1
+                }
+            ]
+        };
+
+        this.chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            layout: {
+                padding: {
+                    left: 20,
+                    right: 20,
+                    top: 30,
+                    bottom: 30
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        maxRotation: 45,
+                        minRotation: 0,
+                        padding: 10
+                    },
+                    grid: {
+                        display: true,
+                        drawOnChartArea: true
+                    }
+                },
+                y: {
+                    ticks: {
+                        beginAtZero: true,
+                        padding: 10
+                    },
+                    grid: {
+                        display: true,
+                        drawOnChartArea: true
+                    }
+                }
+            }
+        };
+    }
+}
+
+
+
+  filterDataByRange(data: PriceData[]) {
     const now = new Date();
-    let filteredData: any[] = [];
+    let filteredData: PriceData[] = [];
 
     switch (this.dateRangeFormControl.value) {
-      case '1D':
-        filteredData = data.slice(-2);
-        const futureDay = {
-          date: { S: this.datePipe.transform(now, 'yyyy-MM-dd') },
-          price: { N: 'null' }
-        };
-        filteredData.push(futureDay);
-        break;
-      case '5D':
-        filteredData = data.slice(-5);
-        break;
-      case '1M':
-        const lastMonth = new Date(now.setMonth(now.getMonth() - 1));
-        filteredData = data.filter((item: any) => new Date(item.date.S) >= lastMonth);
-        break;
-      case '6M':
-        const lastSixMonths = new Date(now.setMonth(now.getMonth() - 6));
-        filteredData = data.filter((item: any) => new Date(item.date.S) >= lastSixMonths);
-        break;
-      case 'YTD':
-        const startOfYear = new Date(now.getFullYear(), 0, 1);
-        filteredData = data.filter((item: any) => new Date(item.date.S) >= startOfYear);
-        break;
-      case '1Y':
-        const lastYear = new Date(now.setFullYear(now.getFullYear() - 1));
-        filteredData = data.filter((item: any) => new Date(item.date.S) >= lastYear);
-        break;
-      default:
-        filteredData = data.slice(-2);
-        break;
+        case '1D':
+            filteredData = data.slice(-2);
+            const futureDay: PriceData = {
+                date: this.datePipe.transform(now, 'yyyy-MM-dd') || 'Unknown Date', // Ensure correct date format
+                price: 0,  // or set to 0, based on your requirement
+                name: 'Future Price' // Placeholder name for future price entry
+            };
+            filteredData.push(futureDay);
+            break;
+        case '5D':
+            filteredData = data.slice(-5);
+            break;
+        case '1M':
+            const lastMonth = new Date(now);
+            lastMonth.setMonth(now.getMonth() - 1);
+            filteredData = data.filter((item: PriceData) => new Date(item.date) >= lastMonth); // Access item.date directly
+            break;
+        case '6M':
+            const lastSixMonths = new Date(now);
+            lastSixMonths.setMonth(now.getMonth() - 6);
+            filteredData = data.filter((item: PriceData) => new Date(item.date) >= lastSixMonths); // Access item.date directly
+            break;
+        case 'YTD':
+            const startOfYear = new Date(now.getFullYear(), 0, 1);
+            filteredData = data.filter((item: PriceData) => new Date(item.date) >= startOfYear); // Access item.date directly
+            break;
+        case '1Y':
+            const lastYear = new Date(now);
+            lastYear.setFullYear(now.getFullYear() - 1);
+            filteredData = data.filter((item: PriceData) => new Date(item.date) >= lastYear); // Access item.date directly
+            break;
+        default:
+            filteredData = data.slice(-2);
+            break;
     }
 
     return filteredData;
-  }
+}
+
+
+  
 }
