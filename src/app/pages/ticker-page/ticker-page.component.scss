@@ -1,0 +1,38 @@
+.ticker-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.ticker-data {
+    width: 90%;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    height: 100%;            
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: Raleway, sans-serif;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+p {
+    font-family: Quicksand, sans-serif;
+}
+
+.buffer-head {
+    height: 3em;
+}
+
+.buffer-tail {
+    height: 20em;
+}

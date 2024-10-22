@@ -7,12 +7,13 @@ import { ChartModule } from 'primeng/chart';
 import { SkeletonModule } from 'primeng/skeleton';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FieldsetModule } from 'primeng/fieldset';
+import { ScrollTopModule } from 'primeng/scrolltop';
 import { StockResponse, TickerMetadata, PriceData } from '../../models/api-response.model';
 
 @Component({
   selector: 'app-ticker-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ChartModule, SelectButtonModule, SkeletonModule, FieldsetModule],
+  imports: [CommonModule, ReactiveFormsModule, ChartModule, SelectButtonModule, SkeletonModule, FieldsetModule, ScrollTopModule],
   templateUrl: './ticker-page.component.html',
   styleUrls: ['./ticker-page.component.scss'],
   providers: [DatePipe]
@@ -24,7 +25,7 @@ export class TickerPageComponent implements OnInit {
   errorMessage: string = '';
   chartData: any;
   chartOptions: any;
-  chartWidth: string = '100%';  
+  chartWidth: string = '66%';  
   chartHeight: string = '400px';
   isLoading: boolean = false;
   dateRangeFormControl: FormControl = new FormControl('1Y');
@@ -68,8 +69,8 @@ export class TickerPageComponent implements OnInit {
       const windowWidth = window.innerWidth;
       const windowHeight = window.innerHeight;
   
-      this.chartWidth = `${windowWidth * 0.8}px`;  
-      this.chartHeight = `${windowHeight * 0.4}px`;
+      this.chartWidth = `${windowWidth * 0.66}px`;  
+      this.chartHeight = `${Math.max(windowHeight * 0.4, 200)}px`;
     }
   }
 

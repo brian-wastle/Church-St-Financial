@@ -6,18 +6,28 @@
 html, body {
   height: 100%;
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  overflow: hidden; /* Prevents scrolling on body */
+  font-family: Quicksand, "Helvetica Neue", sans-serif !important;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   background-color: #f8f8f7;
 }
 
-/* Container for the entire layout */
+//PrimeNG font overrides
+.p-component {
+  font-family: Quicksand, sans-serif !important;
+}
+
+//Angular Material font overrides
+.mat-typography, .mat-button, .mat-input-element, .mat-select-value-text, .mat-checkbox-label, .mat-radio-label-content, 
+.mat-card-title, .mat-card-content, .mat-form-field-label {
+  font-family: 'YourFontName', sans-serif !important;
+}
+
 .sidenav-container {
   display: flex;
   flex-direction: column; 
-  height: 100vh; /* Full viewport height */
+  height: 100vh; 
 }
 
 .fixed-sidebar {
