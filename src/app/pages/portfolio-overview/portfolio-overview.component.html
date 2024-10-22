@@ -1,6 +1,7 @@
 <div *ngIf="cognitoService.currentUserSignal(); else loggedOutTemplate">
     <h1>Welcome!</h1>
     <portfolio-display-list></portfolio-display-list>
+    <transactions-history-overview />
   </div> 
   
   <ng-template #loggedOutTemplate>

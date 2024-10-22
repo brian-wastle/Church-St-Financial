@@ -1,0 +1,32 @@
+<div *ngIf="transactions.length > 0; else noDataTemplate">
+    <h2>{{ stockTicker }} - Transaction Ledger</h2>
+    
+    <p-table [value]="transactions" [paginator]="true" [rows]="10">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Date</th>
+                <th>Units</th>
+                <th>Balance</th>
+                <th>Value</th>
+                <th>Metadata</th>
+                <th>UUID</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-transaction>
+            <tr>
+                <td>{{ transaction.date }}</td>
+                <td>{{ transaction.units }}</td>
+                <td>{{ transaction.balance }}</td>
+                <td>{{ transaction.value }}</td>
+                <td>{{ transaction.metadata }}</td>
+                <td>{{ transaction.uuid }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <p-chart type="line" [data]="chartData" [options]="chartOptions"></p-chart>
+</div>
+
+<ng-template #noDataTemplate>
+    <h3>No transaction data available for this stock.</h3>
+</ng-template>
