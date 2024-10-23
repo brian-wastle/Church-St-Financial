@@ -10,4 +10,5 @@ export const routes: Routes = [
     { path: 'sign-up', component: SignUpComponent }, 
     { path: 'stock/:ticker', component: TickerPageComponent },
     { path: 'portfolio/:ticker', component: TransactionsHistoryOverview },
+    { path: 'portfolio', component: PortfolioOverviewComponent },
 ];

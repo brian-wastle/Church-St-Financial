@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CognitoService } from '../cognito/cognito.service';
 import { environment } from '../../../environments/environment';
-import { StockResponse, TickerMetadata, PriceData, TransactionsHistory, AccountTransactionRecord, TickerTransactionRecord } from '../../models/api-response.model';
+import { StockResponse, TickerMetadata, PriceData, TransactionsHistory } from '../../models/api-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +14,11 @@ export class ApiService {
 
   constructor(private http: HttpClient, private cognitoService: CognitoService) {}
 
+
   getPortfolio(): Observable<any> {
     const currentUser = this.cognitoService.currentUserSignal();
-    const userID: string = currentUser?.username;
+    let userID: string = currentUser?.username;
+    userID ='94b8a4d8-20b1-7002-c209-5b0f15ba6d94';                                               //remove for production
     const idToken: string = currentUser?.idToken || currentUser?.refreshToken;
 
     console.log(currentUser?.username);
@@ -31,7 +33,7 @@ export class ApiService {
     });
 
     const body = {
-      userID: userID // Use dynamic userID for production
+      userID: userID 
     };
     const reqUrl = `${this.apiUrl}/getPortfolio`;
     return this.http.post<any>(reqUrl, body, { headers });
@@ -79,44 +81,19 @@ export class ApiService {
   getStockTransactions(userID: string, ticker: string): Observable<TransactionsHistory> {
     const currentUser = this.cognitoService.currentUserSignal();
     const idToken: string = currentUser?.idToken || currentUser?.refreshToken;
-
+  
     if (!idToken) {
       throw new Error('No valid authentication token found');
     }
-
+  
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': idToken
     });
-
+  
     const reqUrl = `${this.apiUrl}/getStockTransactions?userID=${userID}&ticker=${ticker}`;
-    
-    return this.http.get<{ accountTransactions: AccountTransactionRecord[], tickerTransactions: TickerTransactionRecord[] }>(reqUrl, { headers }).pipe(
-      map(response => {
-        const accountTransactions: AccountTransactionRecord[] = response.accountTransactions.map(transaction => ({
-          date: transaction.date,
-          metadata: transaction.metadata,
-          userID: transaction.userID,
-          uuid: transaction.uuid,
-          value: transaction.value
-        }));
-
-        const tickerTransactions: TickerTransactionRecord[] = response.tickerTransactions.map(transaction => ({
-          balance: transaction.balance,
-          date: transaction.date,
-          metadata: transaction.metadata,
-          units: transaction.units,
-          userID: transaction.userID,
-          uuid: transaction.uuid,
-          value: transaction.value
-        }));
-
-        return {
-          accountTransactions,
-          tickerTransactions
-        };
-      })
-    );
+  
+    return this.http.get<TransactionsHistory>(reqUrl, { headers });
   }
 
   calcHoldingValue(balance: number, price: number): number {

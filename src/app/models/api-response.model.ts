@@ -1,3 +1,5 @@
+
+//Ticker Browse
 export interface TickerMetadata {
   sector?: string;
   industry?: string;
@@ -16,10 +18,13 @@ export interface StockResponse {
   metadata: TickerMetadata[];
 }
 
+
+//Portfolio
 export interface AccountTransactionRecord {
-  date: string;
+  balance: number;
   metadata: string;
   userID: string;
+  date: number;
   uuid: string;
   value: number;
 }
@@ -37,4 +42,18 @@ export interface TickerTransactionRecord {
 export interface TransactionsHistory {
   accountTransactions: AccountTransactionRecord[];
   tickerTransactions: TickerTransactionRecord[];
+}
+
+export interface TransactionRecord {
+  uuid: string;
+  accountTransaction: AccountTransactionRecord;
+  tickerTransaction: TickerTransactionRecord;
+}
+
+export interface InvestmentPerformance {
+  totalSpent: number;  
+  totalEarned: number;  
+  netProfitLoss: number; 
+  currentInvestmentValue: number;
+  roi: number;
 }
