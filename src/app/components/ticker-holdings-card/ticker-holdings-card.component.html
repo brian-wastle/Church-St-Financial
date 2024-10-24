@@ -1,8 +1,30 @@
 <p-card class="card" [styleClass]="'holding-data-card'">
-    <h2>{{ ticker }}</h2>
-    <div class="holding-data">
-        <p>Balance: {{ balance }}</p>
-        <p>Price: {{ formatCurrency(price) }}</p>
-        <p>Value: {{ formatCurrency(totalValue) }}</p>
-    </div>
+    <header>
+        <h2>{{ name }}</h2>
+        <h3>{{ ticker }}</h3>
+    </header>
+    <section class="holding-summary">
+        <div>
+            <p>{{ balance }}</p>
+            <h5>Balance</h5>
+        </div>
+
+        <p>x</p>
+
+        <div>
+            <p>{{ formatCurrency(price) }}</p>
+            <h5>Price</h5>
+        </div>
+
+        <p>=</p>
+
+        <div>
+            <p>{{ formatCurrency(totalValue) }}</p>
+            <h5>Current Value</h5>
+        </div>
+    </section>
+    <section class="price-chart">
+        <p-chart type="line" [data]="chartData" [options]="chartOptions" [height]="chartHeight" [width]="chartWidth"
+            ariaLabel="Three month pricing data"></p-chart>
+    </section>
 </p-card>

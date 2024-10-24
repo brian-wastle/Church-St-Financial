@@ -174,49 +174,55 @@ export class TickerPageComponent implements OnInit {
 
 
 
-  filterDataByRange(data: PriceData[]) {
-    const now = new Date();
-    let filteredData: PriceData[] = [];
+filterDataByRange(data: PriceData[]) {
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  let filteredData: PriceData[] = [];
 
-    switch (this.dateRangeFormControl.value) {
-        case '1D':
-            filteredData = data.slice(-2);
-            const futureDay: PriceData = {
-                date: this.datePipe.transform(now, 'yyyy-MM-dd') || 'Unknown Date', // Ensure correct date format
-                price: 0,  // or set to 0, based on your requirement
-                name: 'Future Price' // Placeholder name for future price entry
-            };
-            filteredData.push(futureDay);
-            break;
-        case '5D':
-            filteredData = data.slice(-5);
-            break;
-        case '1M':
-            const lastMonth = new Date(now);
-            lastMonth.setMonth(now.getMonth() - 1);
-            filteredData = data.filter((item: PriceData) => new Date(item.date) >= lastMonth); // Access item.date directly
-            break;
-        case '6M':
-            const lastSixMonths = new Date(now);
-            lastSixMonths.setMonth(now.getMonth() - 6);
-            filteredData = data.filter((item: PriceData) => new Date(item.date) >= lastSixMonths); // Access item.date directly
-            break;
-        case 'YTD':
-            const startOfYear = new Date(now.getFullYear(), 0, 1);
-            filteredData = data.filter((item: PriceData) => new Date(item.date) >= startOfYear); // Access item.date directly
-            break;
-        case '1Y':
-            const lastYear = new Date(now);
-            lastYear.setFullYear(now.getFullYear() - 1);
-            filteredData = data.filter((item: PriceData) => new Date(item.date) >= lastYear); // Access item.date directly
-            break;
-        default:
-            filteredData = data.slice(-2);
-            break;
-    }
+  switch (this.dateRangeFormControl.value) {
+      case '1D':
+          filteredData = data.slice(-2);
+          const futureDay: PriceData = {
+              date: this.datePipe.transform(now, 'yyyy-MM-dd') || 'Unknown Date',
+              price: 0,
+              name: 'Future Price'
+          };
+          filteredData.push(futureDay);
+          break;
+      case '5D':
+          filteredData = data.slice(-5);
+          break;
+      case '1M':
+          const lastMonth = new Date(now);
+          lastMonth.setMonth(now.getMonth() - 1);
+          lastMonth.setHours(0, 0, 0, 0);
+          filteredData = data.filter((item: PriceData) => new Date(item.date) >= lastMonth);
+          break;
+      case '6M':
+          const lastSixMonths = new Date(now);
+          lastSixMonths.setMonth(now.getMonth() - 6);
+          lastSixMonths.setHours(0, 0, 0, 0);
+          filteredData = data.filter((item: PriceData) => new Date(item.date) >= lastSixMonths);
+          break;
+      case 'YTD':
+          const startOfYear = new Date(now.getFullYear(), 0, 1);
+          startOfYear.setHours(0, 0, 0, 0);
+          filteredData = data.filter((item: PriceData) => new Date(item.date) >= startOfYear);
+          break;
+      case '1Y':
+          const lastYear = new Date(now);
+          lastYear.setFullYear(now.getFullYear() - 1);
+          lastYear.setHours(0, 0, 0, 0);
+          filteredData = data.filter((item: PriceData) => new Date(item.date) >= lastYear);
+          break;
+      default:
+          filteredData = data.slice(-2);
+          break;
+  }
 
-    return filteredData;
+  return filteredData;
 }
+
 
 
   

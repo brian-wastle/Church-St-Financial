@@ -57,3 +57,23 @@ export interface InvestmentPerformance {
   currentInvestmentValue: number;
   roi: number;
 }
+
+export interface PortfolioItem {
+  ticker: string;
+  balance: number;
+  price: number;
+  totalValue: number;
+  chartData?: ChartData;
+  name?: string;
+}
+
+export interface ChartData {
+  labels: string[];
+  datasets: {
+    label: string;
+    data: number[];
+    fill?: boolean;
+    borderColor?: string;
+    backgroundColor?: string;
+  }[];
+}

@@ -1,11 +1,13 @@
 <div *ngIf="!error && holdingsData.length > 0">
   <div class="portfolio-list-wrapper">
-    <div *ngFor="let holding of holdingsData" class="mb-3">
+    <div *ngFor="let holding of holdingsData; trackBy: trackByTicker" class="mb-3">
       <ticker-holdings-card
         [ticker]="holding.ticker"
         [balance]="holding.balance"
         [price]="holding.price"
-        [totalValue]="holding.totalValue">
+        [totalValue]="holding.totalValue"
+        [chartData]="holding.chartData"
+        [name]="holding.name">
       </ticker-holdings-card>
     </div>
   </div>
