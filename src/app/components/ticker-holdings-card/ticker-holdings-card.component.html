@@ -1,12 +1,14 @@
 <p-card class="card" [styleClass]="'holding-data-card'">
     <header>
-        <h2>{{ name }}</h2>
+        <a [routerLink]="['/portfolio', ticker]">
+            <h2>{{ name }}</h2>
+        </a>
         <h3>{{ ticker }}</h3>
     </header>
     <section class="holding-summary">
         <div>
             <p>{{ balance }}</p>
-            <h5>Balance</h5>
+            <h5>Units</h5>
         </div>
 
         <p>x</p>
@@ -23,8 +25,32 @@
             <h5>Current Value</h5>
         </div>
     </section>
-    <section class="price-chart">
-        <p-chart type="line" [data]="chartData" [options]="chartOptions" [height]="chartHeight" [width]="chartWidth"
-            ariaLabel="Three month pricing data"></p-chart>
-    </section>
+    <div class="card-main-data">
+        <section class="price-chart">
+            <p-chart type="line" [data]="chartData" [options]="chartOptions" [height]="chartHeight" [width]="chartWidth"
+                ariaLabel="Three month pricing data"></p-chart>
+        </section>
+
+        <p-card class="inner-card">
+            <div class="return-analytics">
+                <section class="card-investment-total">
+                    <p *ngIf="investment">{{ formatCurrency(investment) }}</p>
+                    <h5>Invested</h5>
+                </section>
+
+                <section class="card-roi">
+                    <p *ngIf="roi">{{ roi }}%</p>
+                    <h5>ROI</h5>
+                </section>
+
+                <section class="card-profit-loss">
+                    <p *ngIf="changeInValue" [style.color]="changeInValue > 0 ? 'green' : 'red'">{{
+                        formatCurrency(changeInValue) }}</p>
+                    <h5>Profit/Loss</h5>
+                </section>
+
+            </div>
+        </p-card>
+    </div>
+
 </p-card>

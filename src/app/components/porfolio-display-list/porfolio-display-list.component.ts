@@ -3,7 +3,7 @@ import { ApiService } from '../../services/apiGateway/api-gateway.service';
 import { CommonModule, DatePipe } from '@angular/common';
 import { DataViewModule } from 'primeng/dataview';
 import { TickerHoldingsCard } from '../ticker-holdings-card/ticker-holdings-card.component';
-import { PortfolioItem, ChartData } from '../../models/api-response.model';
+import { PortfolioItem, ChartData, TransactionsHistory, TransactionRecord } from '../../models/api-response.model';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -15,9 +15,10 @@ import { Subject } from 'rxjs';
   providers: [DatePipe]
 })
 export class PortfolioDisplayList implements OnInit {
-  public holdingsData: PortfolioItem[] = [];
-  public error: string | null = null;
-  public loading: boolean = true;
+  holdingsData: PortfolioItem[] = [];
+  error: string | null = null;
+  loading: boolean = true;
+  transactions: TransactionRecord[] = [];
 
   private updateHoldingsSubject = new Subject<void>();
 
@@ -38,6 +39,7 @@ export class PortfolioDisplayList implements OnInit {
           totalValue: this.apiService.calcHoldingValue(holding.balance, holding.price),
           chartData: undefined,
           name: undefined,
+          totalInvestment: undefined, // Initialize here, you'll update it later
         }));
         this.error = null;
         this.loading = false;
@@ -51,14 +53,46 @@ export class PortfolioDisplayList implements OnInit {
     });
   }
 
+  private loadTransactionData(ticker: string): void {
+    this.apiService.getStockTransactions(ticker).subscribe((response: TransactionsHistory) => {
+      this.transactions = this.apiService.mergeTransactions(response.accountTransactions, response.tickerTransactions);
+      this.transactions.sort((a, b) => new Date(b.accountTransaction.date).getTime() - new Date(a.accountTransaction.date).getTime());
+      const totalInvestment = this.calcTotalInvestment(this.transactions);
+      const holding = this.holdingsData.find(h => h.ticker === ticker);
+      if (holding) {
+        holding.totalInvestment = totalInvestment;
+      }
+    }, error => {
+      console.error('Error loading stock data:', error);
+    });
+  }
+  private calcTotalInvestment(transactions: any[]): number {
+    const totalValue = transactions.reduce((sum, transaction) => {
+      return sum + transaction.accountTransaction.value;
+    }, 0);
+    return totalValue * -1;
+  }
+
   private loadPricingData(): void {
     this.holdingsData.forEach((item, index) => {
       this.apiService.getSingleStock(item.ticker).subscribe(
         currentPriceData => {
-          console.log("currentPriceData: ",currentPriceData);
           const chartData: ChartData = this.preparePricingChartData(currentPriceData.priceData);
           item.chartData = chartData;
           item.name = currentPriceData.priceData[0].name;
+  
+          const data: number[] = chartData.datasets[0]?.data || [];
+          if (data.length > 0) {
+            // Round up and down to nearest 10
+            const minValue = Math.min(...data);
+            const maxValue = Math.max(...data);
+            const min = Math.floor(minValue / 10) * 10;
+            const max = Math.ceil(maxValue / 10) * 10;
+            item.min = min;
+            item.max = max;
+        }
+        this.loadTransactionData(item.ticker)
+        console.log()
           this.updateHoldingsSubject.next();
         },
         error => {
@@ -67,6 +101,8 @@ export class PortfolioDisplayList implements OnInit {
       );
     });
   }
+  
+  
 
   private preparePricingChartData(priceData: any[]): ChartData {
     if (priceData.length === 0) return { labels: [], datasets: [] };
@@ -80,15 +116,15 @@ export class PortfolioDisplayList implements OnInit {
     });
   
     filteredData.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-
-    const labels: string[] = filteredData.map(price => this.datePipe.transform(price.date, 'MM-dd') || ''); // Use DatePipe here
+  
+    const labels: string[] = filteredData.map(price => this.datePipe.transform(price.date, 'MM-dd') || '');
     const data: number[] = filteredData.map(price => price.price);
   
     return {
       labels: labels,
       datasets: [
         {
-          label: 'Price Over Time',
+          label: '3 month pricing data',
           data: data,
           borderColor: '#42A5F5',
           fill: false,
@@ -96,6 +132,8 @@ export class PortfolioDisplayList implements OnInit {
       ]
     };
   }
+  
+  
   
   trackByTicker(index: number, item: PortfolioItem): string {
     return item.ticker;

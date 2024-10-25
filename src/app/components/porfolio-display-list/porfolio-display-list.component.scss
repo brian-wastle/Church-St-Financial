@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+ticker-holdings-card {
+  margin: 10%
+}
+
 @media (max-width: 768px) {
     .portfolio-list-wrapper {
       max-width: 100%;
@@ -13,3 +17,11 @@
       padding-right: 10px;
     }
   }
+
+@media (max-width: 1279px) {
+  .portfolio-list-wrapper {
+    max-width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

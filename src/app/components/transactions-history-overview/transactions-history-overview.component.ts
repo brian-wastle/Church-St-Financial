@@ -67,9 +67,9 @@ export class TransactionsHistoryOverview implements OnInit {
 
   private loadStockData(): void {
     this.isLoadingTransactions = true;
-    this.apiService.getStockTransactions(this.userID, this.stockTicker).subscribe((response: TransactionsHistory) => {
+    this.apiService.getStockTransactions(this.stockTicker).subscribe((response: TransactionsHistory) => {
       // Get users' account/portfolio transaction history, collate and sort by date, prep chart
-      this.transactions = this.mergeTransactions(response.accountTransactions, response.tickerTransactions);
+      this.transactions = this.apiService.mergeTransactions(response.accountTransactions, response.tickerTransactions);
       this.transactions.sort((a, b) => new Date(b.accountTransaction.date).getTime() - new Date(a.accountTransaction.date).getTime());
       this.isLoadingTransactions = false;
       this.prepareAcctChartData();
@@ -78,7 +78,6 @@ export class TransactionsHistoryOverview implements OnInit {
       this.apiService.getSingleStock(this.stockTicker).subscribe(currentPriceData => {
         this.currentStockPrice = currentPriceData.priceData[0].price;
         this.dailyPricingData = currentPriceData.priceData;
-        console.log("dailyPricingData: ", this.dailyPricingData);
         this.preparePricingChartData();
 
         // Calculate invest performance data
@@ -92,26 +91,8 @@ export class TransactionsHistoryOverview implements OnInit {
     });
   }
 
-  private mergeTransactions(accountTransactions: AccountTransactionRecord[], tickerTransactions: TickerTransactionRecord[]): TransactionRecord[] {
-    const mergedTransactions: TransactionRecord[] = [];
-
-    accountTransactions.forEach(accountTx => {
-      const matchingTickerTx = tickerTransactions.find(tickerTx => tickerTx.uuid === accountTx.uuid);
-      if (matchingTickerTx) {
-        mergedTransactions.push({
-          uuid: accountTx.uuid,
-          accountTransaction: accountTx,
-          tickerTransaction: matchingTickerTx
-        });
-      }
-    });
-
-    return mergedTransactions;
-  }
-
   private calculateInvestmentPerformance(transactions: TransactionRecord[], currentPrice: number): InvestmentPerformance {
     let totalSpent = 0;
-    let totalEarned = 0;
     let currentInvestmentValue = 0;
 
     // Create a map for daily prices from dailyPricingData
@@ -120,27 +101,22 @@ export class TransactionsHistoryOverview implements OnInit {
       const date = priceData.date.split('T')[0];
       dailyPriceMap[date] = priceData.price;
     });
-
+    console.log("transactions: ", transactions);
+    //totalSpe
     transactions.forEach(transaction => {
-      const tickerTx = transaction.tickerTransaction;
-      const transactionValue = tickerTx.value * tickerTx.units;
-
-      if (tickerTx.metadata === 'BUY') {
-        totalSpent += transactionValue;
-      } else if (tickerTx.metadata === 'SELL') {
-        totalEarned += transactionValue;
-      }
+      const transactionValue = transaction.accountTransaction.value;
+      totalSpent += transactionValue;
     });
+    totalSpent *= -1;
 
     const totalSharesHeld = this.getTotalSharesHeld();
     currentInvestmentValue = totalSharesHeld * currentPrice;
 
     return {
       totalSpent,
-      totalEarned,
-      netProfitLoss: totalEarned - totalSpent,
+      netProfitLoss: currentInvestmentValue - totalSpent,
       currentInvestmentValue,
-      roi: totalSpent > 0 ? ((currentInvestmentValue - totalSpent) / totalSpent) * 100 : 0,
+      roi: +((currentInvestmentValue - totalSpent)/totalSpent * 100).toFixed(2),
     };
   }
 
@@ -156,15 +132,8 @@ export class TransactionsHistoryOverview implements OnInit {
 
   private preparePricingChartData(): void {
     if (this.dailyPricingData.length === 0 || this.transactions.length === 0) return;
-  
-    // Get the date of the earliest transaction
     const earliestTransactionDate = new Date(this.transactions[0].tickerTransaction.date).toISOString().split('T')[0];
-  
-    // Filter daily pricing data to only include dates from the earliest transaction onward
     const filteredPricingData = this.dailyPricingData.filter(price => price.date.split('T')[0] >= earliestTransactionDate);
-    console.log('Filtered Pricing Data:', filteredPricingData);
-  
-    // Prepare labels and data for the chart
     const labels: string[] = filteredPricingData.map(price => price.date.split('T')[0]);
     const prices: number[] = filteredPricingData.map(price => price.price);
   
@@ -174,7 +143,7 @@ export class TransactionsHistoryOverview implements OnInit {
         label: 'Daily Prices',
         data: prices,
         fill: false,
-        borderColor: '#FF5733', // Use any color you prefer
+        borderColor: '#FF5733',
         tension: 0.1
       }]
     };
@@ -189,7 +158,7 @@ export class TransactionsHistoryOverview implements OnInit {
       },
       scales: {
         y: {
-          beginAtZero: false, // Set to true if you want the y-axis to start at zero
+          beginAtZero: false,
           ticks: {
             callback: (value: number) => value.toString(),
             padding: 10
@@ -201,14 +170,9 @@ export class TransactionsHistoryOverview implements OnInit {
   
 
   private prepareAcctChartData(): void {
-    // Ensure transactions are sorted by date for accurate charting
     this.transactions.sort((a, b) => new Date(a.accountTransaction.date).getTime() - new Date(b.accountTransaction.date).getTime());
-    
-    // Prepare labels and values for account transactions
     const labels: string[] = this.transactions.map(tx => tx.accountTransaction.date.toString().split('T')[0]);
     const transactionValues: number[] = this.transactions.map(tx => tx.accountTransaction.value);
-  
-    // Create a new array to hold investment value for the same labels
     const investmentValues: number[] = Array(labels.length).fill(this.investmentPerformance?.currentInvestmentValue || 0);
   
     // Prepare the chart data
@@ -226,14 +190,13 @@ export class TransactionsHistoryOverview implements OnInit {
           label: 'Current Investment Value',
           data: investmentValues,
           fill: false,
-          borderColor: '#FF5733', // Use any color you prefer
+          borderColor: '#FF5733',
           tension: 0.1,
-          borderDash: [5, 5] // Dotted line for differentiation
+          borderDash: [5, 5]
         }
       ]
     };
   
-    // Chart options remain the same
     this.chartOptionsAccount = {
       responsive: true,
       maintainAspectRatio: false,

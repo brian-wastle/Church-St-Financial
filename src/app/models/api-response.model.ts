@@ -52,7 +52,6 @@ export interface TransactionRecord {
 
 export interface InvestmentPerformance {
   totalSpent: number;  
-  totalEarned: number;  
   netProfitLoss: number; 
   currentInvestmentValue: number;
   roi: number;
@@ -65,6 +64,9 @@ export interface PortfolioItem {
   totalValue: number;
   chartData?: ChartData;
   name?: string;
+  min: number;
+  max: number;
+  totalInvestment?: number;
 }
 
 export interface ChartData {

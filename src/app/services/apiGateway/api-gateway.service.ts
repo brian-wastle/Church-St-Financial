@@ -4,7 +4,15 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CognitoService } from '../cognito/cognito.service';
 import { environment } from '../../../environments/environment';
-import { StockResponse, TickerMetadata, PriceData, TransactionsHistory } from '../../models/api-response.model';
+import { 
+  StockResponse, 
+  TickerMetadata, 
+  PriceData, 
+  TransactionsHistory, 
+  TransactionRecord,
+  AccountTransactionRecord, 
+  TickerTransactionRecord
+} from '../../models/api-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +28,6 @@ export class ApiService {
     let userID: string = currentUser?.username;
     userID ='94b8a4d8-20b1-7002-c209-5b0f15ba6d94';                                               //remove for production
     const idToken: string = currentUser?.idToken || currentUser?.refreshToken;
-
-    console.log(currentUser?.username);
     
     if (!idToken) {
       throw new Error('No valid authentication token found');
@@ -64,7 +70,8 @@ export class ApiService {
           description: metadataArray[0]?.description?.S || null
         } : {};
 
-        const transformedPriceData: PriceData[] = response.priceData?.map((data: any) => ({
+        const orderedPriceData: PriceData[] = response.priceData?.reverse();
+        const transformedPriceData: PriceData[] = orderedPriceData?.map((data: any) => ({
           date: data?.date?.S || 'Unknown Date',
           name: data.name?.S || 'Error: Name Not Found',
           price: parseFloat(data?.price?.N || '0')
@@ -78,8 +85,10 @@ export class ApiService {
     );
   }
 
-  getStockTransactions(userID: string, ticker: string): Observable<TransactionsHistory> {
+  getStockTransactions(ticker: string): Observable<TransactionsHistory> {
     const currentUser = this.cognitoService.currentUserSignal();
+    let userID: string = currentUser?.username;
+    userID ='94b8a4d8-20b1-7002-c209-5b0f15ba6d94';                                               //remove for production
     const idToken: string = currentUser?.idToken || currentUser?.refreshToken;
   
     if (!idToken) {
@@ -94,6 +103,23 @@ export class ApiService {
     const reqUrl = `${this.apiUrl}/getStockTransactions?userID=${userID}&ticker=${ticker}`;
   
     return this.http.get<TransactionsHistory>(reqUrl, { headers });
+  }
+
+mergeTransactions(accountTransactions: AccountTransactionRecord[], tickerTransactions: TickerTransactionRecord[]): TransactionRecord[] {
+    const mergedTransactions: TransactionRecord[] = [];
+
+    accountTransactions.forEach(accountTx => {
+      const matchingTickerTx = tickerTransactions.find(tickerTx => tickerTx.uuid === accountTx.uuid);
+      if (matchingTickerTx) {
+        mergedTransactions.push({
+          uuid: accountTx.uuid,
+          accountTransaction: accountTx,
+          tickerTransaction: matchingTickerTx
+        });
+      }
+    });
+
+    return mergedTransactions;
   }
 
   calcHoldingValue(balance: number, price: number): number {

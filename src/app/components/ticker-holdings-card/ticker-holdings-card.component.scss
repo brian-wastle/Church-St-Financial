@@ -7,6 +7,10 @@ header {
     max-width: 80%;
 }
 
+h3 {
+    color: #77808a;
+}
+
 .holding-data-card {
     display:flex;
     flex-direction: column;
@@ -25,19 +29,12 @@ div.p-card-content {
     justify-content: center;
 }
 
-.price-chart {
-    display: flex;
-    flex-grow: 1;
-    box-sizing: border-box;
-}
-
 p-chart.p-element {
     display: block;
     width: 80%;
-    flex-grow: 1;
+    flex-shrink: 1;
     box-sizing: border-box;
 }
-
 
 .holding-summary div {
     margin: auto;
@@ -46,3 +43,96 @@ p-chart.p-element {
     align-items: center;
     justify-content: center;
 }
+
+.card-main-data {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+:host ::ng-deep  .inner-card .p-card {
+    box-shadow: none;
+    outline: 0.5px ridge;
+    outline-color: #cfd2d7;
+    border-radius: .3rem;
+  }
+
+.return-analytics {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    flex-wrap:wrap;
+}
+
+.price-chart {
+    max-width: 66%;
+    margin-right: 5%;
+    box-sizing: border-box;
+}
+
+.return-analytics section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 2em;
+    margin-left: 2em;
+}
+
+.return-analytics section p{
+    font-size: 24px;
+}
+
+@media (max-width: 1279px) {
+
+
+    .return-analytics {
+        flex-grow: 2;
+
+    }
+    
+    .price-chart {
+        flex-grow: 1;
+        margin-right: 0;
+    }
+
+
+    .return-analytics {
+        padding-top: 1em;
+        flex-direction: column;
+    }
+    .return-analytics section {
+        flex-direction: row;
+        margin-bottom: 1em;
+    }
+
+    .return-analytics section p{
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+  }
+
+@media (max-width: 900px) {
+    .return-analytics {
+        display: flex;
+        padding-top: 1em;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .return-analytics section {
+        flex-direction: column;
+        margin:0;
+    }
+
+    .return-analytics section p{
+        flex-direction: column;
+        margin:0;
+    }
+
+    .price-chart {
+        margin-right: 0;
+    }
+  }
+
+  
