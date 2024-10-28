@@ -3,30 +3,30 @@
         <a [routerLink]="['/portfolio', ticker]">
             <h2>{{ name }}</h2>
         </a>
-        <h3>{{ ticker }}</h3>
+        <h3 matTooltip="This is the abbreviation for this business used on the stock market. Every business has a unique abbreviation.">{{ ticker }}</h3>
     </header>
     <section class="holding-summary">
         <div>
             <p>{{ balance }}</p>
-            <h5>Units</h5>
+            <h5 matTooltip="Total units of this stock that are in your portfolio.">Shares</h5>
         </div>
 
         <p>x</p>
 
         <div>
             <p>{{ formatCurrency(price) }}</p>
-            <h5>Price</h5>
+            <h5 matTooltip="This is the current price for this stock. This number will change daily as the value of the stock increases or decreases.">Price</h5>
         </div>
 
         <p>=</p>
 
         <div>
             <p>{{ formatCurrency(totalValue) }}</p>
-            <h5>Current Value</h5>
+            <h5 matTooltip="This is how much your total investment is currently worth. Multiply the number of shares by the current price of the stock to see how much it is worth.">Current Value</h5>
         </div>
     </section>
     <div class="card-main-data">
-        <section class="price-chart">
+        <section matTooltip="This graph represents the daily share price over the past 3 months." class="price-chart">
             <p-chart type="line" [data]="chartData" [options]="chartOptions" [height]="chartHeight" [width]="chartWidth"
                 ariaLabel="Three month pricing data"></p-chart>
         </section>
@@ -35,18 +35,18 @@
             <div class="return-analytics">
                 <section class="card-investment-total">
                     <p *ngIf="investment">{{ formatCurrency(investment) }}</p>
-                    <h5>Invested</h5>
+                    <h5 matTooltip="This is how much you have spent on shares, minus any profit from shares you have sold.">Invested</h5>
                 </section>
 
                 <section class="card-roi">
                     <p *ngIf="roi">{{ roi }}%</p>
-                    <h5>ROI</h5>
+                    <h5 matTooltip="'Return On Investment' measures how much money you make or lose on an investment compared to what you originally spent. You can calculate this number by subtracting your initial investment from your current investment's value, then dividing that by the initial investment.">ROI</h5>
                 </section>
 
                 <section class="card-profit-loss">
                     <p *ngIf="changeInValue" [style.color]="changeInValue > 0 ? 'green' : 'red'">{{
                         formatCurrency(changeInValue) }}</p>
-                    <h5>Profit/Loss</h5>
+                    <h5 matTooltip="This is how much you have made or lost on this investment. The bigger the number, the better!">Profit/Loss</h5>
                 </section>
 
             </div>

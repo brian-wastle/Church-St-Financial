@@ -2,16 +2,17 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ApiService } from '../../services/apiGateway/api-gateway.service';
 import { CognitoService } from '../../services/cognito/cognito.service';
-import { AccountTransactionRecord, TickerTransactionRecord, TransactionsHistory, TransactionRecord, InvestmentPerformance } from '../../models/api-response.model';
+import { TransactionsHistory, TransactionRecord, InvestmentPerformance } from '../../models/api-response.model';
 import { ActivatedRoute } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { ChartModule } from 'primeng/chart';
+import { CardModule } from 'primeng/card';
 import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'transactions-history-overview',
   standalone: true,
-  imports: [CommonModule, TableModule, ChartModule, SkeletonModule],
+  imports: [CommonModule, TableModule, ChartModule, SkeletonModule, CardModule],
   templateUrl: './transactions-history-overview.component.html',
   styleUrls: ['./transactions-history-overview.component.scss'],
   providers: [DatePipe]
@@ -153,7 +154,7 @@ export class TransactionsHistoryOverview implements OnInit {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          display: true
+          display: false
         }
       },
       scales: {

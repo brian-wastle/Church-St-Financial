@@ -1,0 +1,49 @@
+.main-container {
+    max-width:85%;
+    margin:auto;
+}
+
+h1 {
+    font-size: 36px;
+    font-family: Raleway !important;
+    font-weight: bold;
+}
+
+h2 {
+    margin: 20px 0px 20px 0px;
+}
+
+h1, h2 {
+    margin-left:10px
+}
+
+.current-price {
+    font-size: 24px;
+}
+
+.overview-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: top;
+}
+
+.data-chart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:auto;
+    margin-top: 15px;
+}
+
+.history-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin:auto;
+}
+
+.table-container {
+    width: 80%;
+}

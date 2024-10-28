@@ -101,8 +101,26 @@ export class ApiService {
     });
   
     const reqUrl = `${this.apiUrl}/getStockTransactions?userID=${userID}&ticker=${ticker}`;
-  
+    
     return this.http.get<TransactionsHistory>(reqUrl, { headers });
+  }
+
+  getStockTickers(): Observable<any[]> {
+    const currentUser = this.cognitoService.currentUserSignal();
+    const idToken: string = currentUser?.idToken || currentUser?.refreshToken;
+
+    if (!idToken) {
+      throw new Error('No valid authentication token found');
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': idToken
+    });
+
+    const reqUrl = `${this.apiUrl}/getTickerList`;
+
+    return this.http.get<any[]>(reqUrl, { headers });
   }
 
 mergeTransactions(accountTransactions: AccountTransactionRecord[], tickerTransactions: TickerTransactionRecord[]): TransactionRecord[] {

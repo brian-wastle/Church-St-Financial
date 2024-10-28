@@ -3,6 +3,7 @@ import { CardModule } from 'primeng/card';
 import { CommonModule } from '@angular/common';
 import { ChartData } from '../../models/api-response.model';
 import { ChartModule } from 'primeng/chart';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -10,7 +11,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   templateUrl: './ticker-holdings-card.component.html',
   styleUrls: ['./ticker-holdings-card.component.scss'],
-  imports: [CardModule, CommonModule, ChartModule, RouterModule]
+  imports: [CardModule, CommonModule, ChartModule, RouterModule, MatTooltipModule]
 })
 export class TickerHoldingsCard implements OnInit, OnChanges {
   @Input() ticker: string = '';
@@ -112,7 +113,7 @@ export class TickerHoldingsCard implements OnInit, OnChanges {
       const windowWidth = window.innerWidth;
       const windowHeight = window.innerHeight;
 
-      this.chartWidth = `${windowWidth * 1/3}px`;  
+      this.chartWidth = `${windowWidth * .3}px`;  
       this.chartHeight = `${Math.min(windowHeight * 0.5, 200)}px`;
 
       if (windowWidth <= 768) {

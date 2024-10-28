@@ -7,13 +7,13 @@ import { ChartModule } from 'primeng/chart';
 import { SkeletonModule } from 'primeng/skeleton';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FieldsetModule } from 'primeng/fieldset';
-import { ScrollTopModule } from 'primeng/scrolltop';
+
 import { StockResponse, TickerMetadata, PriceData } from '../../models/api-response.model';
 
 @Component({
   selector: 'app-ticker-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ChartModule, SelectButtonModule, SkeletonModule, FieldsetModule, ScrollTopModule],
+  imports: [CommonModule, ReactiveFormsModule, ChartModule, SelectButtonModule, SkeletonModule, FieldsetModule],
   templateUrl: './ticker-page.component.html',
   styleUrls: ['./ticker-page.component.scss'],
   providers: [DatePipe]
