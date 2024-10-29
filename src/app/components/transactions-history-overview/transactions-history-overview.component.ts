@@ -7,12 +7,14 @@ import { ActivatedRoute } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { ChartModule } from 'primeng/chart';
 import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
+import { BuyStockComponent } from '../buy-stock/buy-stock.component';
 
 @Component({
   selector: 'transactions-history-overview',
   standalone: true,
-  imports: [CommonModule, TableModule, ChartModule, SkeletonModule, CardModule],
+  imports: [CommonModule, TableModule, ChartModule, SkeletonModule, CardModule, BuyStockComponent, ButtonModule],
   templateUrl: './transactions-history-overview.component.html',
   styleUrls: ['./transactions-history-overview.component.scss'],
   providers: [DatePipe]
@@ -32,6 +34,7 @@ export class TransactionsHistoryOverview implements OnInit {
   dailyPricingData: any[] = [];
   isLoadingTransactions: boolean = true;
   isLoadingInvestmentPerformance: boolean = false;
+  isBuyStockModalVisible: boolean = false;
 
   constructor(
     private apiService: ApiService,
@@ -45,7 +48,7 @@ export class TransactionsHistoryOverview implements OnInit {
     this.stockTicker = this.route.snapshot.paramMap.get('ticker') || '';
     const currentUser = this.cognitoService.currentUserSignal();
     this.userID = currentUser?.username || '';
-    this.userID = '94b8a4d8-20b1-7002-c209-5b0f15ba6d94'; // Remove for production
+    this.userID = '94b8a4d8-20b1-7002-c209-5b0f15ba6d94';                           // Remove for production
     if (this.stockTicker && this.userID) {
       this.loadStockData();
     }
@@ -216,6 +219,15 @@ export class TransactionsHistoryOverview implements OnInit {
         }
       }
     };
+  }
+
+  openBuyStockModal() {
+    this.isBuyStockModalVisible = true;
+  }
+
+  closeBuyStockModal() {
+    this.isBuyStockModalVisible = false;
+    this.loadStockData();
   }
   
 }

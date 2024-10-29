@@ -21,7 +21,7 @@
             <p-card>
                 <div class="overview-container">
                     <div class="shares-balance">
-                        <p>Total Shares Held: {{ getTotalSharesHeld() }}</p>
+                        <p>Total Shares Held: {{ getTotalSharesHeld() | number: '1.2-2' }}</p>
                     </div>
 
                     <div class="analytics-container">
@@ -71,6 +71,14 @@
             <p-skeleton width="80%" height="30px"></p-skeleton>
         </ng-template>
     </ng-template>
+
+    <p-button label="Buy Stock" (click)="openBuyStockModal()"></p-button>
+
+    <app-buy-stock
+    [ticker]="stockTicker"
+    [visible]="isBuyStockModalVisible"
+    (onClose)="closeBuyStockModal()">
+    </app-buy-stock>
 
     <div *ngIf="isLoadingTransactions; else transactionsTemplate">
         <h2>Account History</h2>

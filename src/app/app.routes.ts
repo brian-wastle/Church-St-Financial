@@ -7,8 +7,8 @@ import { TransactionsHistoryOverview } from './components/transactions-history-o
 import { SearchComponent } from './components/search-component/search.component';
 
 export const routes: Routes = [
-    // { path: '', component: PortfolioOverviewComponent }, 
-    { path: '', component: SearchComponent }, 
+    { path: '', component: PortfolioOverviewComponent }, 
+    { path: 'search', component: SearchComponent }, 
     { path: 'sign-up', component: SignUpComponent }, 
     { path: 'stock/:ticker', component: TickerPageComponent },
     { path: 'portfolio/:ticker', component: TransactionsHistoryOverview },
