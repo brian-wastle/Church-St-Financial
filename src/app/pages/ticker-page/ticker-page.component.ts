@@ -6,14 +6,24 @@ import { ApiService } from '../../services/apiGateway/api-gateway.service';
 import { ChartModule } from 'primeng/chart';
 import { SkeletonModule } from 'primeng/skeleton';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { ButtonModule } from 'primeng/button';
 import { FieldsetModule } from 'primeng/fieldset';
-
+import { BuyStockComponent } from '../../components/buy-stock/buy-stock.component';
 import { StockResponse, TickerMetadata, PriceData } from '../../models/api-response.model';
 
 @Component({
   selector: 'app-ticker-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ChartModule, SelectButtonModule, SkeletonModule, FieldsetModule],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule, 
+    ChartModule, 
+    SelectButtonModule, 
+    SkeletonModule, 
+    FieldsetModule, 
+    BuyStockComponent,
+    ButtonModule,
+  ],
   templateUrl: './ticker-page.component.html',
   styleUrls: ['./ticker-page.component.scss'],
   providers: [DatePipe]
@@ -21,13 +31,16 @@ import { StockResponse, TickerMetadata, PriceData } from '../../models/api-respo
 export class TickerPageComponent implements OnInit {
   tickerData: any = null;
   tickerName: string | null = "";
+  tickerAbbv: string| null = "";
   tickerMetadata: TickerMetadata | null = null;
-  errorMessage: string = '';
+  isBuyStockModalVisible: boolean = false;
   chartData: any;
   chartOptions: any;
   chartWidth: string = '66%';  
   chartHeight: string = '400px';
   isLoading: boolean = false;
+  isLoadingMetadata: boolean = false;
+  errorMessage: string = '';
   dateRangeFormControl: FormControl = new FormControl('1Y');
   ranges: any[] = [
     { label: '1D', value: '1D' },
@@ -48,6 +61,7 @@ export class TickerPageComponent implements OnInit {
     this.updateChartSize();
     this.route.paramMap.subscribe(params => {
       this.tickerName = params.get('ticker');
+      this.tickerAbbv = this.tickerName;
       if (this.tickerName) {
         this.tickerName = this.tickerName.toUpperCase();
         this.getStock(this.tickerName);
@@ -76,23 +90,26 @@ export class TickerPageComponent implements OnInit {
 
   getStock(ticker: string) {
     this.isLoading = true;
+    this.isLoadingMetadata = true;
     this.apiService.getSingleStock(ticker).subscribe({
       next: (data: StockResponse) => {
+        this.tickerName = String(data.priceData[0]?.name);
+        data.priceData.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
         this.tickerData = data;        
 
-        this.tickerName = String(data.priceData[0]?.name);
         const { sector, industry, website, description } = data.metadata[0]; 
         this.tickerMetadata = { sector, industry, website, description };
+        this.isLoadingMetadata = false;
   
         this.errorMessage = '';
         this.prepareChartData();
-        console.log("Filtered Metadata: ", this.tickerMetadata);
         this.isLoading = false;
       },
       error: (error) => {
         this.errorMessage = 'Error fetching ticker data';
         this.tickerData = null;
         this.isLoading = false;
+        this.isLoadingMetadata = false;
       }
     });
   }
@@ -104,16 +121,16 @@ export class TickerPageComponent implements OnInit {
         const filteredData = this.filterDataByRange(this.tickerData.priceData);
         const labels = filteredData.map((item: PriceData) => {
             const formattedDate = this.datePipe.transform(item.date, 'MM/dd');
-            return formattedDate; // item.date is now a string
+            return formattedDate;
         });
 
         const prices = filteredData.map((item: PriceData) => {
-            return item.price; // item.price is now a number
+            return item.price;
         });
 
         if (labels.length === 0 || prices.length === 0) {
             console.error('No data available for the chart');
-            return; // No data to display
+            return;
         }
 
         this.chartData = {
@@ -223,7 +240,11 @@ filterDataByRange(data: PriceData[]) {
   return filteredData;
 }
 
-
-
+openBuyStockModal() {
+  this.isBuyStockModalVisible = true;
+}
+closeModal() {
+  this.isBuyStockModalVisible = false;
+}
   
 }

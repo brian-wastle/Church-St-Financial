@@ -1,7 +1,8 @@
 <div class="main-container">
-    <a [routerLink]="['/stock', stockTicker]">
-        <h1 *ngIf="stockTicker">{{ stockTicker }}</h1>
-    </a>
+    <div class="buffer-head"></div>
+    <h1 *ngIf="stockTicker"><a [routerLink]="['/stock', stockTicker]">
+        {{ stockTicker }}
+    </a></h1>
 
     <!-- Investment Performance Skeletons -->
     <ng-container *ngIf="isLoadingInvestmentPerformance; else investmentPerformanceContent">
@@ -10,7 +11,7 @@
         <p-skeleton width="80%" height="40px"></p-skeleton>
         <p-skeleton width="100%" height="30px"></p-skeleton>
     </ng-container>
-    
+
     <!-- Investment Performance Section -->
     <ng-template #investmentPerformanceContent>
         <div *ngIf="currentStockPrice !== null">
@@ -22,21 +23,25 @@
             <p-card>
                 <div class="overview-container">
                     <div class="shares-balance">
-                        <p>Total Shares Held: {{ calcTotalSharesHeld() | number: '1.2-2' }}</p>
+                        <p [style]="{'font-weight': 'bold'}">Total Shares:</p>
+                        <p>{{ calcTotalSharesHeld() | number: '1.2-2' }}</p>
                     </div>
 
                     <div class="analytics-container">
-                        <p>Invested: {{ investmentPerformance.totalSpent | currency:'USD':'symbol':'1.2-2' }}</p>
-                        <p>ROI: {{ investmentPerformance.roi }}%</p>
+                        <p>Invested:</p>
+                        <p>{{ investmentPerformance.totalSpent | currency:'USD':'symbol':'1.2-2' }}</p>
+                        <p>ROI:</p>
+                        <p>{{ investmentPerformance.roi }}%</p>
                     </div>
 
                     <div class="analytics-container">
-                        <p>Current Value: {{ investmentPerformance.currentInvestmentValue | currency:'USD':'symbol':'1.2-2' }}</p>
+                        <p>Current Value:</p>
+                        <p>{{ investmentPerformance.currentInvestmentValue | currency:'USD':'symbol':'1.2-2' }}</p>
                         <p>
-                            Net Profit/Loss:
-                            <span [style.color]="investmentPerformance.netProfitLoss > 0 ? 'green' : 'red'">
-                                {{ investmentPerformance.netProfitLoss | currency:'USD':'symbol':'1.2-2' }}
-                            </span>
+                            Net Profit/Loss:</p>
+                        <p [style.color]="investmentPerformance.netProfitLoss > 0 ? 'green' : 'red'">
+                            {{ investmentPerformance.netProfitLoss | currency:'USD':'symbol':'1.2-2' }}
+
                         </p>
                     </div>
                 </div>
@@ -44,7 +49,8 @@
             <!-- Price Chart -->
             <h2>Stock Performance Since Investing</h2>
             <p-chart type="line" [data]="chartDataPrices" [options]="chartOptionsPrices" [height]="chartHeight"
-                [width]="chartWidth" class="data-chart"></p-chart>
+                [width]="chartWidth" class="data-chart" />
+
         </div>
 
         <ng-template #noInvestmentData>
@@ -54,10 +60,20 @@
         </ng-template>
     </ng-template>
 
-    <!-- Buy Stock Button -->
-    <p-button label="Buy Stock" (click)="openBuyStockModal()"></p-button>
-    <app-buy-stock [ticker]="stockTicker" [visible]="isBuyStockModalVisible" (onClose)="closeBuyStockModal()"></app-buy-stock>
-
+    <div class="button-container">
+        <!-- Buy Stock Button -->
+        <div class="transaction-button">
+            <p-button [raised]="true" class="large-button green-button" label="Buy This Stock" (click)="openBuyStockModal()"></p-button>
+            <app-buy-stock [ticker]="stockTicker" [visible]="isBuyStockModalVisible"
+                (onClose)="closeModal()"></app-buy-stock>
+        </div>
+        <!-- Sell Stock Button -->
+        <div class="transaction-button">
+            <p-button [raised]="true" class="large-button red-button" label="Sell This Stock" (click)="openSellStockModal()"></p-button>
+            <app-sell-stock [ticker]="stockTicker" [visible]="isSellStockModalVisible"
+                (onClose)="closeModal()"></app-sell-stock>
+        </div>
+    </div>
     <!-- Transactions Skeletons -->
     <ng-container *ngIf="isLoadingTransactions; else transactionsContent">
         <h2>Account History</h2>
@@ -71,7 +87,7 @@
         <h2>Account History</h2>
         <div *ngIf="transactions.length > 0; else noTransactionData">
             <!-- Transactions Table -->
-            <p-table [value]="transactions" [paginator]="true" [rows]="5">
+            <p-table [value]="transactions" [paginator]="true" [rows]="8">
                 <ng-template pTemplate="header">
                     <tr>
                         <th>Date</th>
@@ -86,7 +102,8 @@
                 <ng-template pTemplate="body" let-transaction>
                     <tr>
                         <td>{{ transaction.tickerTransaction.date | date: 'mediumDate' }}</td>
-                        <td [ngStyle]="{'font-weight': 'bold', color: transaction.tickerTransaction.metadata === 'BUY' ? 'green' : 'red'}">
+                        <td
+                            [ngStyle]="{'font-weight': 'bold', color: transaction.tickerTransaction.metadata === 'BUY' ? 'green' : 'red'}">
                             {{ transaction.tickerTransaction.metadata }}
                         </td>
                         <td>{{ transaction.tickerTransaction.units }}</td>
@@ -100,7 +117,7 @@
 
             <!-- Transactions Chart -->
             <p-chart type="line" [data]="chartDataAccount" [options]="chartOptionsAccount" [height]="chartHeight"
-                [width]="chartWidth" class="data-chart"/>
+                [width]="chartWidth" class="data-chart" />
 
         </div>
 
@@ -108,4 +125,5 @@
             <h3>No transaction data available for this stock.</h3>
         </ng-template>
     </ng-template>
+    <div class="buffer-tail"></div>
 </div>

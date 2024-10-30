@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { CognitoService } from '../cognito/cognito.service';
 import { environment } from '../../../environments/environment';
 import { 
@@ -123,9 +122,35 @@ export class ApiService {
     });
 
     const body = { userID, ticker, amount };
-    console.log('Making API call with:', { userID, ticker, amount });
 
     return this.http.post(`${this.apiUrl}/buyStock`, body, { headers }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error occurred:', error);
+        console.error('Error status:', error.status);
+        console.error('Error message:', error.message);
+        return throwError('Something went wrong; please try again later.');
+      })
+    );
+  }
+
+  sellStock(ticker: string, amount: number): Observable<any> {
+    const currentUser = this.cognitoService.currentUserSignal();
+    let userID: string = currentUser?.username;
+    userID = '94b8a4d8-20b1-7002-c209-5b0f15ba6d94';                                              //remove in production
+    const idToken: string = currentUser?.idToken || currentUser?.refreshToken;
+
+    if (!idToken) {
+      throw new Error('No valid authentication token found');
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': idToken
+    });
+
+    const body = { userID, ticker, amount };
+
+    return this.http.post(`${this.apiUrl}/sellStock`, body, { headers }).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Error occurred:', error);
         console.error('Error status:', error.status);

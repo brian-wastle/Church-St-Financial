@@ -2,16 +2,29 @@
     <div class="buffer-head"></div>
     <div class="ticker-content">
         <div class="ticker-data">
-            <h1>{{this.tickerName}}</h1>
-            <div *ngIf="tickerMetadata">
-                <h5>{{this.tickerMetadata.sector}}</h5>
-                <h4>{{this.tickerMetadata.industry}}</h4>
+            <div class="metadata-container">
+                <div class="metadata-display">
+                    <h1>{{this.tickerName}}</h1>
+                    <div *ngIf="tickerMetadata">
+                        <h5>{{this.tickerMetadata.sector}}</h5>
+                        <h4>{{this.tickerMetadata.industry}}</h4>
+                    </div>
+                </div>
+                <div class="metadata-button">
+                    <div *ngIf="tickerAbbv && !isLoading" class="transaction-button">
+                        <p-button class="large-button green-button" label="Buy This Stock" (click)="openBuyStockModal()"></p-button>
+                        <app-buy-stock [ticker]="tickerAbbv" [visible]="isBuyStockModalVisible"
+                            (onClose)="closeModal()"></app-buy-stock>
+                    </div>
+                </div>
             </div>
 
-            <div *ngIf="isLoading">
-                <p-skeleton width="200px" height="50px" styleClass="mt-2"></p-skeleton>
+            <div *ngIf="isLoading" class="loading-skeleton">
+                <p-skeleton width="200px" height="50px"></p-skeleton>
                 <br>
-                <p-skeleton width="100%" height="300px"></p-skeleton>
+                <div class="skeleton-container">
+                    <p-skeleton width="80%" height="300px"></p-skeleton>
+                </div>
             </div>
 
             <div *ngIf="errorMessage" class="error">
@@ -19,7 +32,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="ticker-content" *ngIf="chartData">
         <div class="date-range-selector ticker-data">
             <label for="range">Select Date Range:</label>
@@ -28,28 +41,34 @@
             </p-selectButton>
         </div>
 
-        <div class="chart-containter" >
+        <div class="chart-containter">
             <p-chart type="line" [data]="chartData" [options]="chartOptions" [height]="chartHeight"
                 [width]="chartWidth">
             </p-chart>
         </div>
     </div>
 
+    <div *ngIf="isLoadingMetadata" class="loading-skeleton">
+        <div class="skeleton-container">
+            <p-skeleton width="80%" height="150px" *ngIf="!tickerMetadata?.description"></p-skeleton>
+            <p-skeleton width="80%" height="200px" *ngIf="!tickerMetadata?.website"></p-skeleton>
+        </div>
+    </div>
+
+
     <div *ngIf="tickerMetadata" class="ticker-content">
         <p-fieldset class="ticker-data" legend="Business Info">
-            <p>{{this.tickerMetadata.description}}</p>
+            <p>{{ this.tickerMetadata.description }}</p>
         </p-fieldset>
         <br>
         <p-fieldset class="ticker-data website-container" legend="Website">
             <p *ngIf="this.tickerMetadata.website; else noSiteFound">
-                <a [href]="this.tickerMetadata.website" target="_blank">{{this.tickerMetadata.website}}</a>
+                <a [href]="this.tickerMetadata.website" target="_blank">{{ this.tickerMetadata.website }}</a>
             </p>
             <ng-template #noSiteFound>
                 <h5>No website found.</h5>
             </ng-template>
         </p-fieldset>
-
-        
     </div>
-    <div class="buffer-room"></div>
+    <div class="buffer-tail"></div>
 </div>

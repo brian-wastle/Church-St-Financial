@@ -63,21 +63,44 @@ export class TransactionsService {
 
   preparePricingChartData(): any {
     const filteredPricingData = this.dailyPricingData;
-    const labels = filteredPricingData.map(price => this.datePipe.transform(price.date, 'MM-dd'));  // Format dates to MM-dd
+    const labels = filteredPricingData.map(price => this.datePipe.transform(price.date, 'MM-dd'));
     const prices = filteredPricingData.map(price => price.price);
-
-    return {
+  
+    const chartDataPrices = {
       labels,
       datasets: [{
         label: 'Daily Prices',
         data: prices,
+        fill: false,
         borderColor: '#FF5733',
+        tension: 0.1
       }]
     };
+  
+    const chartOptionsPrices = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: false
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: false,
+          ticks: {
+            callback: (value: number) => value.toString(),
+            padding: 10
+          }
+        }
+      }
+    };
+  
+    return { chartDataPrices, chartOptionsPrices };
   }
 
   prepareAcctChartData(transactions: TransactionRecord[], investmentValue: number): any {
-    const labels = transactions.map(tx => this.datePipe.transform(tx.accountTransaction.date, 'MM-dd'));  // Format dates to MM-dd
+    const labels = transactions.map(tx => this.datePipe.transform(tx.accountTransaction.date, 'MM-dd')); 
     const transactionValues = transactions.map(tx => tx.accountTransaction.value);
     const investmentValues = Array(labels.length).fill(investmentValue);
 

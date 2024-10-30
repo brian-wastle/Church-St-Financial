@@ -25,7 +25,7 @@ h1, h2, h3, h4, h5 {
 //Angular Material font overrides
 .mat-typography, .mat-button, .mat-input-element, .mat-select-value-text, .mat-checkbox-label, .mat-radio-label-content, 
 .mat-card-title, .mat-card-content, .mat-form-field-label {
-  font-family: 'YourFontName', sans-serif !important;
+  font-family: Quicksand, sans-serif !important;
 }
 
 .sidenav-container {
@@ -65,7 +65,6 @@ mat-sidenav-content {
 /* Ensuring that only the main content area scrolls */
 .main-content {
   flex: 1;
-  padding: 16px;
   overflow-y: auto; /* Enable vertical scrolling only */
   box-sizing: border-box;
   border: none;
@@ -109,12 +108,44 @@ mat-sidenav-content {
   }
 }
 
-.p-button {
+.date-range-selector .p-button {
   padding: 6px 12px;
   font-size: 14px;
   border-radius: 4px;
   background-color: #003366;
   color: white;
+}
+
+.auth-buttons .p-button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  background-color: #003366;
+  color: white;
+}
+
+.large-button .p-button {
+  padding: 24px 64px;
+  font-size: 20px;
+  border-radius: 8px;
+  background-color: #003366;
+  color: white;
+}
+
+.large-button.green-button .p-button {
+  padding: 24px 64px;
+  font-size: 20px;
+  border-radius: 8px;
+  background-color: #7FB77E;
+  color: #ecfceb;
+}
+
+.large-button.red-button .p-button {
+  padding: 24px 64px;
+  font-size: 20px;
+  border-radius: 8px;
+  background-color: #E57373;
+  color: #f8eded;
 }
 
 .p-card .p-card-body {

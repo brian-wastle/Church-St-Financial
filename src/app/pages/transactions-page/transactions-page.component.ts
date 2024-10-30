@@ -3,13 +3,14 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { CognitoService } from '../../services/cognito/cognito.service';
 import { TransactionsService } from '../../services/transactions/transactions.service';
 import { TransactionRecord, InvestmentPerformance } from '../../models/api-response.model';
+import { SellStockComponent } from '../../components/sell-stock/sell-stock.component';
+import { BuyStockComponent } from '../../components/buy-stock/buy-stock.component';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { ChartModule } from 'primeng/chart';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { SkeletonModule } from 'primeng/skeleton';
-import { BuyStockComponent } from '../../components/buy-stock/buy-stock.component';
 import { forkJoin } from 'rxjs';
 import { switchMap, tap, catchError } from 'rxjs/operators';
 
@@ -17,7 +18,16 @@ import { switchMap, tap, catchError } from 'rxjs/operators';
 @Component({
   selector: 'transactions-page',
   standalone: true,
-  imports: [CommonModule, RouterModule, TableModule, ChartModule, SkeletonModule, CardModule, BuyStockComponent, ButtonModule],
+  imports: [
+    CommonModule, 
+    RouterModule, 
+    TableModule, 
+    ChartModule, 
+    SkeletonModule, 
+    CardModule, 
+    BuyStockComponent, 
+    SellStockComponent, 
+    ButtonModule],
   templateUrl: './transactions-page.component.html',
   styleUrls: ['./transactions-page.component.scss'],
   providers: [DatePipe]
@@ -36,6 +46,7 @@ export class TransactionsPageComponent implements OnInit {
   isLoadingTransactions: boolean = true;
   isLoadingInvestmentPerformance: boolean = false;
   isBuyStockModalVisible: boolean = false;
+  isSellStockModalVisible: boolean = false;
 
   constructor(
     private transactionsService: TransactionsService,
@@ -44,14 +55,14 @@ export class TransactionsPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.updateChartSize();
     this.stockTicker = this.route.snapshot.paramMap.get('ticker') || '';
     const currentUser = this.cognitoService.currentUserSignal();
     const userID = currentUser?.username || '';
-
+    
     if (this.stockTicker && userID) {
       this.loadStockData();
     }
+    this.updateChartSize();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -82,7 +93,9 @@ export class TransactionsPageComponent implements OnInit {
       ),
       tap(({ price, transactions }) => {
         this.currentStockPrice = price;
-        this.chartDataPrices = this.transactionsService.preparePricingChartData();
+        const { chartDataPrices, chartOptionsPrices } = this.transactionsService.preparePricingChartData();
+        this.chartDataPrices = chartDataPrices;
+        this.chartOptionsPrices = chartOptionsPrices;
         this.investmentPerformance = this.transactionsService.calculateInvestmentPerformance(transactions, price);
         this.isLoadingTransactions = false;
       }),
@@ -101,9 +114,18 @@ export class TransactionsPageComponent implements OnInit {
   openBuyStockModal() {
     this.isBuyStockModalVisible = true;
   }
-
-  closeBuyStockModal() {
-    this.isBuyStockModalVisible = false;
-    this.loadStockData();
+  
+  openSellStockModal() {
+    this.isSellStockModalVisible = true;
   }
+
+  closeModal() {
+    if (this.isBuyStockModalVisible == true) {
+      this.isBuyStockModalVisible = false;
+    }
+    this.isSellStockModalVisible = false;
+    window.location.reload();
+  }
+
+
 }

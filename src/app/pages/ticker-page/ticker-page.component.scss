@@ -6,8 +6,33 @@
     
 }
 
+.skeleton-container p-skeleton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 3em;
+}
+
+br {
+    height: 10px;
+}
+
 .ticker-data {
     width: 90%;
+}
+
+.metadata-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media (min-width: 1278px) {
+.metadata-button {
+    padding-right: 3em;
+}
 }
 
 .chart-container {
@@ -17,12 +42,12 @@
     height: 100%;            
 }
 
-h1, h2, h3, h4, h5 {
-    font-family: Raleway, sans-serif;
-}
-
 h1 {
     font-size: 3em;
+}
+
+h1, h5, h4, .date-range-selector {
+    margin-left: 10px
 }
 
 p {

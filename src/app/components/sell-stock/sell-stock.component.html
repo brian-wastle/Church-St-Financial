@@ -1,1 +1,20 @@
-<p>sell-stock works!</p>
+<p-dialog header="Sell Stock" [(visible)]="visible" [modal]="true" (onHide)="onDialogClose()">
+    <form [formGroup]="sellForm" (ngSubmit)="sellStock()">
+      <div class="p-field">
+        <label for="amount">Amount</label>
+        <input type="number" id="amount" formControlName="unitAmount" pInputText placeholder="Enter amount" />
+        <div *ngIf="sellForm.controls['unitAmount'].hasError('pattern')">
+          Please enter a valid unit amount (e.g., 1000 or 1000.99).
+        </div>
+      </div>
+  
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+  
+      <p-progressSpinner *ngIf="loading" strokeWidth="4"></p-progressSpinner>
+  
+      <p-button label="Submit" type="submit" [disabled]="sellForm.invalid || loading"></p-button>
+    </form>
+  </p-dialog>
+  

@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { ApiService } from '../../services/apiGateway/api-gateway.service';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
@@ -26,6 +27,7 @@ export class BuyStockComponent {
 
   constructor(
     private fb: FormBuilder, 
+    private router: Router,
     private apiService: ApiService,
   ) {
     this.buyForm = this.fb.group({
@@ -43,7 +45,7 @@ export class BuyStockComponent {
   buyStock() {
     if (this.buyForm.valid) {
       this.loading = true;
-      this.errorMessage = null; // Clear any previous errors
+      this.errorMessage = null;
       const { dollarAmount } = this.buyForm.value;
 
       this.apiService.buyStock(this.ticker, dollarAmount).subscribe({
@@ -51,7 +53,7 @@ export class BuyStockComponent {
           this.loading = false;
           this.onClose.emit();
           this.buyForm.reset();
-          window.location.reload();
+          this.router.navigate([`/portfolio/${this.ticker}`]);
         },
         error: (error) => {
           this.loading = false;
