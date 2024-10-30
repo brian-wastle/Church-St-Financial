@@ -1,0 +1,111 @@
+<div class="main-container">
+    <a [routerLink]="['/stock', stockTicker]">
+        <h1 *ngIf="stockTicker">{{ stockTicker }}</h1>
+    </a>
+
+    <!-- Investment Performance Skeletons -->
+    <ng-container *ngIf="isLoadingInvestmentPerformance; else investmentPerformanceContent">
+        <h2>Investment Overview</h2>
+        <p-skeleton width="60%" height="20px"></p-skeleton>
+        <p-skeleton width="80%" height="40px"></p-skeleton>
+        <p-skeleton width="100%" height="30px"></p-skeleton>
+    </ng-container>
+    
+    <!-- Investment Performance Section -->
+    <ng-template #investmentPerformanceContent>
+        <div *ngIf="currentStockPrice !== null">
+            <h2 class="current-price">Current Stock Price: ${{ currentStockPrice.toFixed(2) }}</h2>
+        </div>
+
+        <div *ngIf="investmentPerformance; else noInvestmentData">
+            <h2>Investment Overview</h2>
+            <p-card>
+                <div class="overview-container">
+                    <div class="shares-balance">
+                        <p>Total Shares Held: {{ calcTotalSharesHeld() | number: '1.2-2' }}</p>
+                    </div>
+
+                    <div class="analytics-container">
+                        <p>Invested: {{ investmentPerformance.totalSpent | currency:'USD':'symbol':'1.2-2' }}</p>
+                        <p>ROI: {{ investmentPerformance.roi }}%</p>
+                    </div>
+
+                    <div class="analytics-container">
+                        <p>Current Value: {{ investmentPerformance.currentInvestmentValue | currency:'USD':'symbol':'1.2-2' }}</p>
+                        <p>
+                            Net Profit/Loss:
+                            <span [style.color]="investmentPerformance.netProfitLoss > 0 ? 'green' : 'red'">
+                                {{ investmentPerformance.netProfitLoss | currency:'USD':'symbol':'1.2-2' }}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </p-card>
+            <!-- Price Chart -->
+            <h2>Stock Performance Since Investing</h2>
+            <p-chart type="line" [data]="chartDataPrices" [options]="chartOptionsPrices" [height]="chartHeight"
+                [width]="chartWidth" class="data-chart"></p-chart>
+        </div>
+
+        <ng-template #noInvestmentData>
+            <p-skeleton width="60%" height="20px"></p-skeleton>
+            <p-skeleton width="80%" height="40px"></p-skeleton>
+            <p-skeleton width="80%" height="30px"></p-skeleton>
+        </ng-template>
+    </ng-template>
+
+    <!-- Buy Stock Button -->
+    <p-button label="Buy Stock" (click)="openBuyStockModal()"></p-button>
+    <app-buy-stock [ticker]="stockTicker" [visible]="isBuyStockModalVisible" (onClose)="closeBuyStockModal()"></app-buy-stock>
+
+    <!-- Transactions Skeletons -->
+    <ng-container *ngIf="isLoadingTransactions; else transactionsContent">
+        <h2>Account History</h2>
+        <p-skeleton></p-skeleton>
+        <p-skeleton width="100%" height="200px"></p-skeleton>
+        <p-skeleton width="80%" height="150px"></p-skeleton>
+    </ng-container>
+
+    <!-- Transactions Content -->
+    <ng-template #transactionsContent>
+        <h2>Account History</h2>
+        <div *ngIf="transactions.length > 0; else noTransactionData">
+            <!-- Transactions Table -->
+            <p-table [value]="transactions" [paginator]="true" [rows]="5">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Units</th>
+                        <th>Value</th>
+                        <th>Balance</th>
+                        <th>Price</th>
+                        <th>Account Balance</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-transaction>
+                    <tr>
+                        <td>{{ transaction.tickerTransaction.date | date: 'mediumDate' }}</td>
+                        <td [ngStyle]="{'font-weight': 'bold', color: transaction.tickerTransaction.metadata === 'BUY' ? 'green' : 'red'}">
+                            {{ transaction.tickerTransaction.metadata }}
+                        </td>
+                        <td>{{ transaction.tickerTransaction.units }}</td>
+                        <td>{{ transaction.tickerTransaction.value | currency:'USD':'symbol':'1.2-2' }}</td>
+                        <td>{{ transaction.tickerTransaction.balance | number:'1.2-2' }}</td>
+                        <td>{{ transaction.accountTransaction.value | currency:'USD':'symbol':'1.2-2' }}</td>
+                        <td>{{ transaction.accountTransaction.balance | currency:'USD':'symbol':'1.2-2' }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+
+            <!-- Transactions Chart -->
+            <p-chart type="line" [data]="chartDataAccount" [options]="chartOptionsAccount" [height]="chartHeight"
+                [width]="chartWidth" class="data-chart"/>
+
+        </div>
+
+        <ng-template #noTransactionData>
+            <h3>No transaction data available for this stock.</h3>
+        </ng-template>
+    </ng-template>
+</div>
