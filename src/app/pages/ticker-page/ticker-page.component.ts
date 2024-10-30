@@ -10,6 +10,7 @@ import { ButtonModule } from 'primeng/button';
 import { FieldsetModule } from 'primeng/fieldset';
 import { BuyStockComponent } from '../../components/buy-stock/buy-stock.component';
 import { StockResponse, TickerMetadata, PriceData } from '../../models/api-response.model';
+import { CognitoService } from '../../services/cognito/cognito.service';
 
 @Component({
   selector: 'app-ticker-page',
@@ -29,6 +30,7 @@ import { StockResponse, TickerMetadata, PriceData } from '../../models/api-respo
   providers: [DatePipe]
 })
 export class TickerPageComponent implements OnInit {
+  userId: string | null = "";
   tickerData: any = null;
   tickerName: string | null = "";
   tickerAbbv: string| null = "";
@@ -54,11 +56,14 @@ export class TickerPageComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private datePipe: DatePipe,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cognitoService: CognitoService
   ) {}
 
   ngOnInit() {
     this.updateChartSize();
+    const currentUser = this.cognitoService.currentUserSignal();
+    this.userId = currentUser?.username || null;
     this.route.paramMap.subscribe(params => {
       this.tickerName = params.get('ticker');
       this.tickerAbbv = this.tickerName;

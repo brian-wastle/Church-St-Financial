@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="metadata-button">
-                    <div *ngIf="tickerAbbv && !isLoading" class="transaction-button">
+                    <div *ngIf="tickerAbbv && !isLoading && userId" class="transaction-button">
                         <p-button class="large-button green-button" label="Buy This Stock" (click)="openBuyStockModal()"></p-button>
                         <app-buy-stock [ticker]="tickerAbbv" [visible]="isBuyStockModalVisible"
                             (onClose)="closeModal()"></app-buy-stock>
