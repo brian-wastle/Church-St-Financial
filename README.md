@@ -18,7 +18,13 @@ Clone or fork the repo to your local machine and run ```npm i``` to install depe
 
 ## Usage
 
-Once you've signed up with an authenticated email, you will be given a pretend account worth $100,000 to invest in the an array of stocks available on our database with daily pricing updates. User the side bar nagivation to access your portfolio page, or browse for new stocks to invest. On your portfolio page, you can track your purchases and sales of stock, and follow fluctuations in the price of your investments. On the browse page, you can see detailed pricing histories, and explore investments based on details about the company like sector, industry, and description, and official website. 
+Once you've signed up with an authenticated email, you will be given a pretend account worth $100,000 to invest in the an array of stocks available on our database with daily pricing updates. 
+
+Use the side bar nagivation to access your portfolio page, or browse for new stocks to invest. 
+
+On your portfolio page, you can track your purchases and sales of stock, and follow fluctuations in the price of your investments. 
+
+On the browse page, you can see detailed pricing histories, and explore investments based on details about the company like sector, industry, and description, and official website. 
 
 ## License
 
