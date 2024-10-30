@@ -1,27 +1,36 @@
-# ChurchStFinancial
+# Church St. Financial [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Description
+
+Church St. Financial (CSF) is an stock trading education website with a hands-on approach for students new to finance. This website allows you to create an account with which you can invest up to $100,000 in "CSF Credit", and then track your investments as they grow or shrink. Our UI is designed for ages 14+, so very little knowledge is required to get started. Many of the terms on the site provide a definition on mouse hover, with some introductory equations mixed in as well. Students can explore details about the businesses they want to invest in by browsing with our advanced search options. When students decide their nest egg is large enough, they can sell off their shares and see who has become the most savvy investor.
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [Tests](#tests)
+- [Questions](#questions)
+
+## Installation
+
+Clone or fork the repo to your local machine and run ```npm i``` to install dependencies. The back end code for this repo exists within my [Lambda-DynamoDB Resources](https://github.com/brian-wastle/Lambda-DynamoDB-Resources) repo.
+
+## Usage
+
+Once you've signed up with an authenticated email, you will be given a pretend account worth $100,000 to invest in the an array of stocks available on our database with daily pricing updates. User the side bar nagivation to access your portfolio page, or browse for new stocks to invest. On your portfolio page, you can track your purchases and sales of stock, and follow fluctuations in the price of your investments. On the browse page, you can see detailed pricing histories, and explore investments based on details about the company like sector, industry, and description, and official website. 
+
+## License
+
+To know more about the MIT license please visit https://opensource.org/licenses/MIT.
+
+## Tests
+
+Not yet in progress.
+
+## Questions
+
+[Brian Wastle's GitHub profile](https://github.com/brian-wastle)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.4.
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
