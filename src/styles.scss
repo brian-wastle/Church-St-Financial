@@ -28,6 +28,11 @@ h1, h2, h3, h4, h5 {
   font-family: Quicksand, sans-serif !important;
 }
 
+ul {
+  list-style-type: none;
+  padding:0px;
+}
+
 .sidenav-container {
   display: flex;
   flex-direction: column; 
@@ -41,9 +46,13 @@ h1, h2, h3, h4, h5 {
   padding: 16px;
 }
 
+div.mat-drawer-inner-container {
+  overflow:hidden;
+}
+
 app-header {
   height: 80px;
-  background-color: #e3f2fd;
+  background-color: #BCD4F5;
   color: white;
   display: flex;
   justify-content: flex-end;
@@ -53,31 +62,28 @@ app-header {
   box-shadow: none;
 }
 
-/* Sidenav content should stretch to fill the available height */
 mat-sidenav-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   border: none;
+  border-radius: 0px;
   box-shadow: none;
 }
 
-/* Ensuring that only the main content area scrolls */
 .main-content {
   flex: 1;
-  overflow-y: auto; /* Enable vertical scrolling only */
+  overflow-y: auto;
   box-sizing: border-box;
   border: none;
   box-shadow: none;
 }
 
-/* Styling for the fixed sidebar */
 .fixed-sidebar p {
   color: #333;
   font-size: 16px;
 }
 
-/* Responsive design for smaller screens */
 @media (max-width: 768px) {
   .fixed-sidebar {
     width: 100%;
@@ -107,6 +113,8 @@ mat-sidenav-content {
     font-family: 'Quicksand', sans-serif !important;
   }
 }
+
+
 
 .date-range-selector .p-button {
   padding: 6px 12px;

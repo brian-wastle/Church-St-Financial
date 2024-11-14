@@ -47,10 +47,11 @@ export class SearchComponent implements OnInit {
 
     this.route.queryParams.subscribe(params => {
       this.highlightText = params['highlight'] || null; 
+      console.log("Highlight Text:", this.highlightText); // Debugging
     });
-  }
+}
 
-  onSearch() {
+onSearch() {
     if (this.searchForm.invalid) {
       this.errorMessage = "Please enter a search term.";
       return;
@@ -61,13 +62,14 @@ export class SearchComponent implements OnInit {
     const searchTerm = this.searchForm.value.searchTerm;
 
     this.router.navigate([], {
-      queryParams: { highlight: searchTerm }, 
+      queryParams: { highlight: searchTerm },
       queryParamsHandling: 'merge',
     });
 
     this.searchResults = this.searchService.search(searchTerm);
+    console.log("Search Results:", this.searchResults); // Debugging
     this.isLoading = false;
-  }
+}
 
   highlightMatches(text: string, highlight: string): string {
     if (!highlight) return text;

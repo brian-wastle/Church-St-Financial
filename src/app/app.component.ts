@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenav } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { DatePipe } from '@angular/common';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,8 @@ import { DatePipe } from '@angular/common';
     HeaderComponent,
     MatButtonModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    SidenavComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],

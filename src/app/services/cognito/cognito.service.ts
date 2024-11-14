@@ -65,14 +65,16 @@ export class CognitoService {
         const refreshToken = session.getRefreshToken().getToken();
         const tokenExpiration = session.getIdToken().getExpiration();
         const username = this.getJwtPayload(idToken).sub;
+        const firstName = this.getJwtPayload(idToken).given_name;
 
         if (Date.now() > tokenExpiration * 1000) {
           this.clearUserData();
           return resolve(false);
         }
 
-        this.currentUserSignal.set({ idToken, accessToken, refreshToken, tokenExpiration, username });
-        this.storeUserData({ idToken, accessToken, refreshToken, tokenExpiration, username });
+        this.currentUserSignal.set({ idToken, accessToken, refreshToken, tokenExpiration, username, firstName });
+        console.log("Current user set:", this.currentUserSignal());
+        this.storeUserData({ idToken, accessToken, refreshToken, tokenExpiration, username , firstName });
         resolve(true);
       });
     });
@@ -100,11 +102,12 @@ export class CognitoService {
         const refreshToken = session.getRefreshToken().getToken();
         const tokenExpiration = session.getIdToken().getExpiration();
         const username = this.getJwtPayload(idToken).sub;
+        const firstName = this.getJwtPayload(idToken).given_name;
 
         if (Date.now() > tokenExpiration * 1000) return resolve(false);
 
-        this.currentUserSignal.set({ idToken, accessToken, refreshToken, tokenExpiration, username });
-        this.storeUserData({ idToken, accessToken, refreshToken, tokenExpiration, username });
+        this.currentUserSignal.set({ idToken, accessToken, refreshToken, tokenExpiration, username, firstName });
+        this.storeUserData({ idToken, accessToken, refreshToken, tokenExpiration, username, firstName });
         resolve(true);
       });
     });
@@ -125,14 +128,17 @@ export class CognitoService {
   }
 
   private handleAuthSuccess(session: CognitoUserSession, username: string, rememberDevice: boolean, resolve: (value?: any) => void, reject: (reason?: any) => void): void {
+    const idToken: string = session.getIdToken().getJwtToken();
+
     const tokens = {
-      idToken: session.getIdToken().getJwtToken(),
+      idToken: idToken,
       accessToken: session.getAccessToken().getJwtToken(),
       refreshToken: session.getRefreshToken().getToken(),
       tokenExpiration: session.getIdToken().getExpiration(),
+      firstName: this.getJwtPayload(idToken).given_name
     };
 
-    this.storeUserData({ ...tokens, username }, rememberDevice);
+    this.storeUserData({ ...tokens, username}, rememberDevice);
     this.currentUserSignal.set({ ...tokens, username });
     resolve(session);
   }
@@ -148,13 +154,14 @@ export class CognitoService {
   }
 
   // Store user data in session or local storage based on user preference
-  private storeUserData(user: { idToken: string, accessToken: string, refreshToken: string, tokenExpiration: number, username: string }, rememberDevice = false): void {
+  private storeUserData(user: { idToken: string, accessToken: string, refreshToken: string, tokenExpiration: number, username: string, firstName: string }, rememberDevice = false): void {
     const storage = rememberDevice ? localStorage : sessionStorage;
     storage.setItem('idToken', user.idToken);
     storage.setItem('accessToken', user.accessToken);
     storage.setItem('refreshToken', user.refreshToken);
     storage.setItem('username', user.username);
     storage.setItem('tokenExpiration', user.tokenExpiration.toString());
+    storage.setItem('tokenExpiration', user.firstName);
   }
 
   // Get JWT payload to extract user data
@@ -276,12 +283,15 @@ export class CognitoService {
             console.log("Login successful:", session);
   
             // Store the session and user data
+            const idToken: string = session.getIdToken().getJwtToken();
+
             const tokens = {
-              idToken: session.getIdToken().getJwtToken(),
+              idToken: idToken,
               accessToken: session.getAccessToken().getJwtToken(),
               refreshToken: session.getRefreshToken().getToken(),
               tokenExpiration: session.getIdToken().getExpiration(),
               username: email,
+              firstName: this.getJwtPayload(idToken).given_name
             };
   
             // Store in session or local storage based on preference

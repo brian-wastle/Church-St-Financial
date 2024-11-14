@@ -1,7 +1,7 @@
 <header>
   <div class="auth-buttons">
-    <p-button icon="pi pi-user" label="Log Out" size="small" *ngIf="isLoggedIn" (click)="logout()" />
-    <p-button icon="pi pi-user" label="Log In" size="small" *ngIf="!isLoggedIn && !showLoginForm" (click)="toggleLoginForm()" />
+    <p-button icon="pi pi-user" [text]="true" label="Log Out" size="small" *ngIf="isLoggedIn" (click)="logout()" />
+    <p-button icon="pi pi-user" [text]="true" label="Log In" size="small" *ngIf="!isLoggedIn && !showLoginForm" (click)="toggleLoginForm()" />
   </div>
 </header>
 

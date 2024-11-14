@@ -28,7 +28,7 @@ export class AuthModalComponent implements OnInit {
   authForm: FormGroup;
   loading: boolean = false;
   errorMessage: string | null = null;
-  hasValidSession: boolean = false;  // To track session validity
+  hasValidSession: boolean = false;  
 
   constructor(private formBuilder: FormBuilder, public cognitoService: CognitoService) {
     this.authForm = this.formBuilder.group({
@@ -37,10 +37,9 @@ export class AuthModalComponent implements OnInit {
       rememberDevice: [false]
     });
 
-    // Use the signal to observe the current user session status
     effect(() => {
       const currentUser = this.cognitoService.currentUserSignal();
-      this.hasValidSession = !!currentUser && !!currentUser.idToken;  // Set the session status
+      this.hasValidSession = !!currentUser && !!currentUser.idToken;
     });
   }
 

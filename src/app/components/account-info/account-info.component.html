@@ -1,0 +1,16 @@
+<div class="main-container">
+<div *ngIf="isLoggedIn(); else notLoggedInTemplate">
+    <!-- Template to show when the user is logged in -->
+    <h2>{{ currentUser()?.firstName }}'s Account</h2>
+    <p>Current Credit:</p>
+    <p>{{ currentBalance | currency: 'USD': 'symbol' }}</p>
+    <p>Total Investment:</p>
+    <p>{{ totalInvestmentValue | currency: 'USD': 'symbol' }}</p>
+  </div>
+  
+  <ng-template #notLoggedInTemplate>
+    <!-- Template to show when the user is not logged in -->
+    <h2>Welcome!</h2>
+    <p>Please log in to view your account info.</p>
+  </ng-template>
+</div>

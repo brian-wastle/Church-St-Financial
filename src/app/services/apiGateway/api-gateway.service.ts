@@ -46,6 +46,31 @@ export class ApiService {
     return this.http.post<any>(reqUrl, body, { headers });
   }
 
+  getAccountBalance(): Observable<any> {
+    const currentUser = this.cognitoService.currentUserSignal();
+    let userID: string = currentUser?.username;
+    userID ='94b8a4d8-20b1-7002-c209-5b0f15ba6d94';                                               //remove for production
+    const idToken: string = currentUser?.idToken || currentUser?.refreshToken;
+    
+    if (!idToken) {
+      throw new Error('No valid authentication token found');
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': idToken
+    });
+
+    const reqUrl = `${this.apiUrl}/getAccountBalance?userId=${userID}`;
+    console.log("reqURL: ", reqUrl);
+    return this.http.get<any>(reqUrl, { headers }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching account balance:', error);
+        return throwError('Error fetching account balance, please try again later.');
+      })
+    );
+  }
+
   getSingleStock(ticker: string): Observable<StockResponse> {
     const currentUser = this.cognitoService.currentUserSignal();
     const idToken: string = currentUser?.idToken || currentUser?.refreshToken;
@@ -162,19 +187,10 @@ export class ApiService {
 
   getStockTickers(): Observable<any[]> {
     const currentUser = this.cognitoService.currentUserSignal();
-    const idToken: string = currentUser?.idToken || currentUser?.refreshToken;
 
-    if (!idToken) {
-      throw new Error('No valid authentication token found');
-    }
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': idToken
-    });
 
     const reqUrl = `${this.apiUrl}/getTickerList`;
-    return this.http.get<any[]>(reqUrl, { headers });
+    return this.http.get<any[]>(reqUrl);
   }
 
 mergeTransactions(accountTransactions: AccountTransactionRecord[], tickerTransactions: TickerTransactionRecord[]): TransactionRecord[] {

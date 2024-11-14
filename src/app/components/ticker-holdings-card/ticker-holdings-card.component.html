@@ -26,7 +26,7 @@
         </div>
     </section>
     <div class="card-main-data">
-        <section matTooltip="This graph represents the daily share price over the past 3 months." class="price-chart">
+        <section matTooltip="This graph represents the daily share price over the past 3 months." matTooltipPosition="below" class="price-chart">
             <p-chart type="line" [data]="chartData" [options]="chartOptions" [height]="chartHeight" [width]="chartWidth"
                 ariaLabel="Three month pricing data"></p-chart>
         </section>

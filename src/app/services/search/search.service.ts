@@ -46,8 +46,8 @@ setDocuments(docs: any[]) {
       console.warn('Index is not created.');
       return [];
     }
-
-    return this.index.search(query).map(result => {
+    var newQuery:string = query.concat('~2');
+    return this.index.search(newQuery).map(result => {
       return this.documents.find(doc => doc.name === result.ref);
     });
   }
