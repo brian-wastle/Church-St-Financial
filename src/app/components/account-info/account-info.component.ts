@@ -18,8 +18,9 @@ export class AccountInfoComponent {
   isLoggedIn;
   error: string | null = null;
   loading: boolean | null = null;
-  currentBalance: number | null = 0;
-  totalInvestmentValue: number = 0; // New property to store the sum of totalValue
+  currentBalance: number = 0;
+  totalInvestmentValue: number = 0;
+  totalBalance: number = 0;
 
   constructor(
     private cognitoService: CognitoService,
@@ -32,7 +33,7 @@ export class AccountInfoComponent {
       if (user) {
         this.onUserLogin(user);
       }
-      this.cdRef.markForCheck();  // Explicitly trigger change detection
+      this.cdRef.markForCheck();
     });
     this.isLoggedIn = computed(() => !!this.currentUser());
   }
@@ -41,7 +42,8 @@ export class AccountInfoComponent {
     this.loading = true;
     this.apiService.getAccountBalance().subscribe({
       next: (data: any) => {
-        this.currentBalance = data.balance;
+        this.currentBalance = data.balance? data.balance : 0;
+        this.totalBalance += this.currentBalance;
         this.error = null;
         this.loading = false;
       },
@@ -114,6 +116,7 @@ export class AccountInfoComponent {
     this.totalInvestmentValue = this.holdingsData.reduce((total, item) => {
       return total + (item.totalValue || 0);
     }, 0);
+    this.totalBalance += this.totalInvestmentValue;
   }
 }
 

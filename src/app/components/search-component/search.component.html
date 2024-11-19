@@ -1,24 +1,30 @@
-<div class="search-container">
-    <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
-        <input 
-            formControlName="searchTerm" 
-            type="text" 
-            placeholder="Search for a ticker..." 
-            required
-        />
-        <button type="submit">Search</button>
+
+    <form class="search-form" [formGroup]="searchForm" (ngSubmit)="onSearch()">
+        <span>
+            <i class="search-icon pi pi-search"
+                style="font-size: 14px"></i>
+            <input class="search-input" formControlName="searchTerm" pInputText type="text" styleClass="search-icon"
+                placeholder="E.g. &quot;Google&quot; or &quot;Computer Software&quot;..." />
+        </span>
+        <button class="search-submit" type="submit">Search</button>
     </form>
 
     <div class="results">
-        <h2>Search Results</h2>
+        <h2 *ngIf="searchResults.length">Search Results for "{{searchTerm}}"</h2>
         <ul>
-            <li *ngFor="let result of searchResults">
-                <span [innerHTML]="highlightMatches(result?.name || '', highlightText ?? '')"></span> 
-                ({{ result?.ticker }}) - <span [innerHTML]="highlightMatches(result?.description || '', highlightText ?? '')"></span>
+            <li class="search-result" *ngFor="let result of searchResults">
+                <div class="result-heading">
+                    <h3 class="ticker-name" >
+                        <a [routerLink]="['/stock', result?.ticker]" [innerHTML]="highlightMatches(result?.name || '', highlightText ?? '')"></a>
+                    </h3>
+                    <p class="ticker-symbol">({{ result?.ticker }})</p>
+                </div>
+                <p class="ticker-description" [innerHTML]="highlightMatches(result?.description || '', highlightText ?? '')"></p>
             </li>
         </ul>
 
         <div *ngIf="isLoading">Loading results...</div>
         <div *ngIf="errorMessage">{{ errorMessage }}</div>
     </div>
-</div>
+
+

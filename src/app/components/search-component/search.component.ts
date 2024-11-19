@@ -3,14 +3,16 @@ import { CommonModule } from '@angular/common';
 import { SearchService } from '../../services/search/search.service';
 import { ApiService } from '../../services/apiGateway/api-gateway.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-search-component',
   standalone: true,
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
-  imports: [CommonModule, ReactiveFormsModule]
+  imports: [CommonModule, ReactiveFormsModule, ButtonModule, InputTextModule, RouterLink]
 })
 export class SearchComponent implements OnInit {
   searchForm: FormGroup;
@@ -18,6 +20,7 @@ export class SearchComponent implements OnInit {
   errorMessage: string | null = null; 
   searchResults: any[] = [];
   highlightText: string | null = null;
+  searchTerm: string | null = null;
 
   constructor(
     private searchService: SearchService,
@@ -34,7 +37,6 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.apiService.getStockTickers().subscribe({
       next: (tickers) => {
-        console.log("Tickers: ", tickers);
         this.searchService.setDocuments(tickers);
       },
       error: (error) => {
@@ -46,8 +48,12 @@ export class SearchComponent implements OnInit {
     });
 
     this.route.queryParams.subscribe(params => {
-      this.highlightText = params['highlight'] || null; 
-      console.log("Highlight Text:", this.highlightText); // Debugging
+      this.highlightText = params['highlight'] || null;
+  
+      if (this.highlightText) {
+        this.searchForm.patchValue({ searchTerm: this.highlightText });
+        this.onSearch();
+      }
     });
 }
 
@@ -59,15 +65,18 @@ onSearch() {
 
     this.isLoading = true;
     this.errorMessage = null;
-    const searchTerm = this.searchForm.value.searchTerm;
+    this.searchTerm = this.searchForm.value.searchTerm;
+
+    if (!this.searchTerm) {
+      return;
+    }
 
     this.router.navigate([], {
-      queryParams: { highlight: searchTerm },
+      queryParams: { highlight: this.searchTerm },
       queryParamsHandling: 'merge',
     });
-
-    this.searchResults = this.searchService.search(searchTerm);
-    console.log("Search Results:", this.searchResults); // Debugging
+    var searchTermFuzzy = this.searchTerm.concat('~1 ', this.searchTerm, '* *', this.searchTerm);
+    this.searchResults = this.searchService.search(searchTermFuzzy);
     this.isLoading = false;
 }
 

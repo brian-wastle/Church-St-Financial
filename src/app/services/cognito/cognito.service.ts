@@ -28,19 +28,19 @@ export class CognitoService {
 
   private loadUserFromStorage(): void {
     if (!this.isBrowser()) {
-      return;
+        return;
     }
-    const userDataFromStorage = {
-      idToken: localStorage.getItem('idToken') || sessionStorage.getItem('idToken'),
-      username: localStorage.getItem('username') || sessionStorage.getItem('username'),
-      tokenExpiration: localStorage.getItem('tokenExpiration') || sessionStorage.getItem('tokenExpiration')
-    };
-    if (this.isTokenValid(userDataFromStorage)) {
-      this.currentUserSignal.set(userDataFromStorage);
+    const idToken = localStorage.getItem('idToken') || sessionStorage.getItem('idToken');
+    const username = localStorage.getItem('username') || sessionStorage.getItem('username');
+    const tokenExpiration = localStorage.getItem('tokenExpiration') || sessionStorage.getItem('tokenExpiration');
+    const firstName = localStorage.getItem('firstName') || sessionStorage.getItem('firstName');
+    
+    if (idToken && tokenExpiration && Date.now() < Number(tokenExpiration) * 1000) {
+        this.currentUserSignal.set({ idToken, username, tokenExpiration, firstName });
     } else {
-      this.clearUserData();
+        this.clearUserData();
     }
-  }
+}
 
   private isTokenValid({ idToken, tokenExpiration }: { idToken: string | null, tokenExpiration: string | null }): boolean {
     return !!(idToken && tokenExpiration && Date.now() < Number(tokenExpiration) * 1000);
@@ -161,7 +161,7 @@ export class CognitoService {
     storage.setItem('refreshToken', user.refreshToken);
     storage.setItem('username', user.username);
     storage.setItem('tokenExpiration', user.tokenExpiration.toString());
-    storage.setItem('tokenExpiration', user.firstName);
+    storage.setItem('firstName', user.firstName);
   }
 
   // Get JWT payload to extract user data

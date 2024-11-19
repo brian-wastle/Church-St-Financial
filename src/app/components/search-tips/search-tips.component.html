@@ -1,0 +1,47 @@
+<div class="tips-container">
+    <p-card class="header-card" >
+        <i class="search-intro pi pi-compass"></i><span class="card-title">Learn More</span>
+        <ng-template pTemplate="header">
+        </ng-template>
+        
+        <br>
+        <hr class="search-rule">
+        <p class="search-intro">Welcome to the browse page! Here you will find the companies where you will invest your
+            credit. If any of the results match your exact search, you'll see them highlighted below. Use the following
+            tips to begin exploring the market:</p>
+    </p-card>
+    <div class="tip-column">
+        <p-panel header="Search by Ticker Symbol" toggler="header" [collapsed]="true" [toggleable]="true">
+            <p>
+                Stock <b>ticker symbols</b> are unique abbreviations assigned to companies, such as <b>AAPL</b> for
+                Apple or <b>TSLA</b> for Tesla.
+                If you know the ticker symbol, simply type it into the search bar for direct results.
+            </p>
+        </p-panel>
+
+        <p-panel header="Search by Company Name" toggler="header" [collapsed]="true" [toggleable]="true">
+            <p>
+                You can also search using the <b>full or partial</b> name of the company.
+                For example, typing <b></b>"Microsoft" will show relevant results even if you don’t know the ticker
+                symbol.
+            </p>
+        </p-panel>
+    </div>
+    <div class="tip-column">
+        <p-panel header="Use Keywords for Industries or Sectors" toggler="header" [collapsed]="true"
+            [toggleable]="true">
+            <p>
+                If you’re exploring stocks in a particular industry or sector, try using keywords like
+                <b>“technology,” “healthcare,”</b> or <b>“energy”</b>. This can help you discover companies you
+                might not have considered.
+            </p>
+        </p-panel>
+
+        <p-panel header="Experiment with Synonyms" toggler="header" [collapsed]="true" [toggleable]="true">
+            <p>
+                Sometimes companies or industries are listed under <b>alternative names</b> or <b>synonyms</b>. If
+                your first search doesn’t yield results, try variations of the term.
+            </p>
+        </p-panel>
+    </div>
+</div>

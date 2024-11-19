@@ -28,6 +28,20 @@ h1, h2, h3, h4, h5 {
   font-family: Quicksand, sans-serif !important;
 }
 
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  caret-color: #3f51b5;
+  outline-color: #3f51b5;
+}
+
+//top buffer on page components
+.buffer-head {
+  height: 3em;
+}
+
 ul {
   list-style-type: none;
   padding:0px;
@@ -163,4 +177,9 @@ mat-sidenav-content {
 
 .search-container .highlighted {
   font-weight: bold !important;
+}
+
+
+.header-card .p-card {
+  background-color: #eff2f5 !important;
 }

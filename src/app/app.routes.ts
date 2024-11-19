@@ -4,11 +4,11 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { TickerPageComponent } from './pages/ticker-page/ticker-page.component';
 import { PortfolioOverviewComponent } from './pages/portfolio-overview/portfolio-overview.component';
 import { TransactionsPageComponent } from './pages/transactions-page/transactions-page.component';
-import { SearchComponent } from './components/search-component/search.component';
+import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 export const routes: Routes = [
     { path: '', component: PortfolioOverviewComponent }, 
-    { path: 'search', component: SearchComponent }, 
+    { path: 'search', component: SearchPageComponent }, 
     { path: 'sign-up', component: SignUpComponent }, 
     { path: 'stock/:ticker', component: TickerPageComponent },
     { path: 'portfolio/:ticker', component: TransactionsPageComponent },
@@ -18,3 +18,4 @@ export const routes: Routes = [
 export const appRoutingProviders = [
     provideRouter(routes, withPreloading(PreloadAllModules))
 ];
+ 

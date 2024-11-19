@@ -6,6 +6,8 @@
     <p>{{ currentBalance | currency: 'USD': 'symbol' }}</p>
     <p>Total Investment:</p>
     <p>{{ totalInvestmentValue | currency: 'USD': 'symbol' }}</p>
+    <p>Total Balance:</p>
+    <p>{{ totalBalance | currency: 'USD': 'symbol' }}</p>
   </div>
   
   <ng-template #notLoggedInTemplate>

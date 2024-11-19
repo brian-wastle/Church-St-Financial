@@ -62,7 +62,6 @@ export class ApiService {
     });
 
     const reqUrl = `${this.apiUrl}/getAccountBalance?userId=${userID}`;
-    console.log("reqURL: ", reqUrl);
     return this.http.get<any>(reqUrl, { headers }).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Error fetching account balance:', error);
