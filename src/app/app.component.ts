@@ -8,6 +8,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { DatePipe } from '@angular/common';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { DisclaimersComponent } from './components/disclaimers/disclaimers.component';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    SidenavComponent
+    SidenavComponent,
+    DisclaimersComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],

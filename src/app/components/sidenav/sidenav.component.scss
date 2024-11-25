@@ -55,3 +55,10 @@ li a {
         background-color: #bcd4f5;
     }
 }
+
+.sidenav-buffer {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: center;
+}

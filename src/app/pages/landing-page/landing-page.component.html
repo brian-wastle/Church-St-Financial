@@ -1,8 +1,42 @@
-<div *ngIf="cognitoService.currentUserSignal(); else loggedOutTemplate">
-  <h1>Welcome!</h1>
-  <portfolio-display-list></portfolio-display-list>
-</div> 
+<div class="landing-container">
+  <div class="buffer-head"></div>
+  <div class="buffer-head"></div>
+  <h1 class="title">Your Investing Journey Starts Here </h1>
 
-<ng-template #loggedOutTemplate>
-  <h1>Please log in to access this page.</h1>
-</ng-template>
+  <div class="intro-text">
+
+    <div class="image-left image-container">
+      <img class="icon-img" src="assets/moneybrain.webp" alt="Learning icon">
+      <p>Church St. Financial is an interactive learning platform designed for students to explore the exciting world of
+        stock trading in a fun and risk-free environment. Whether you're new to investing or looking to sharpen your
+        skills, this
+        is the perfect place to start.</p>
+    </div>
+
+    <div class="image-right image-container">
+      <p>When you sign up, you'll receive $100,000 in Church St. Credit (CSC), a virtual currency you can use to buy and
+        sell shares. Build your portfolio, track daily performance, and gain real-worldexperience—all 
+        without spending a dime.</p>
+      <img class="icon-img" src="assets/coinpalm.webp" alt="Coin icon">
+    </div>
+
+    <div class="image-left image-container">
+      <img class="icon-img" src="assets/dollarbulb.webp" alt="Lightbulb icon">
+      <p>Use our Browse page to discover new stocks. If a company catches your eye, dive deeper into their story
+        on their company page to learn more about their business.</p>
+    </div>
+
+    <div class="image-right image-container">
+      <p>With Church St. Financial, you'll gain valuable insights into how the stock market works, make strategic
+        decisions,
+        and see how your investments grow over time. It's not just about trading—it's about building confidence and
+        understanding the financial world in a safe and supportive environment.</p>
+      <img class="icon-img" src="assets/plant.webp" alt="Potted plant icon">
+    </div>
+    <br><br>
+    <p>Start your journey today and unlock the tools to become a smarter, more informed investor.</p>
+
+  </div>
+  <img class="graph-img" src="assets/groupgraph.jpg" alt="Graph illustration">
+  <div class="buffer-tail"></div>
+</div>

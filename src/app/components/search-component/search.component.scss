@@ -1,9 +1,4 @@
 
-
-
-
-// Search Bar
-
 .search-form {
     display: flex;
     flex-direction: row;
@@ -50,15 +45,12 @@
     align-items: center;
 }
 
-
 .ticker-name {
     font-size: 22px;
     a {
         text-decoration: none;
     }
 }
-
-
 
 .ticker-symbol {
     font-size: 12px;
@@ -67,10 +59,6 @@
 .ticker-description {
     font-size: 16px;
 }
-
-
-
-
 
 @media (max-width: 1000px) {
     .search-input {

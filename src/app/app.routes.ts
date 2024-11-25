@@ -7,7 +7,7 @@ import { TransactionsPageComponent } from './pages/transactions-page/transaction
 import { SearchPageComponent } from './pages/search-page/search-page.component';
 
 export const routes: Routes = [
-    { path: '', component: PortfolioOverviewComponent }, 
+    { path: '', component: LandingPageComponent }, 
     { path: 'search', component: SearchPageComponent }, 
     { path: 'sign-up', component: SignUpComponent }, 
     { path: 'stock/:ticker', component: TickerPageComponent },
